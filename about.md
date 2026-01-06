@@ -5,5 +5,7 @@ permalink: /about/
 ---
 
 Hello! 👋  
-This is the About page of my blog.  
+I’m Ines and I specialize in Microsoft Fabric and Power BI.  
+I created this blog to share practical insights, learnings, and tips from my experience to solve real-world data challenges.
+Everything you’ll find here reflects my personal views and is not affiliated with Microsoft.
 
