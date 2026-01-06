@@ -1,4 +1,4 @@
 ---
 layout: home
-title: Ines' BI blog
+title: Home
 ---
