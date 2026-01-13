@@ -172,7 +172,7 @@ I’ll be sharing more real-world troubleshooting scenarios and advanced tips in
 References:
 
 - Microsoft's official documentation on the Oracle connector:
-   - [Power Query Oracle database connector \- Power Query | Microsoft Learn](https://learn.microsoft.com/en-us/power-query/connectors/oracle-database) 
-   - [Connect to an Oracle Database with Power BI Desktop \- Power BI | Microsoft Learn](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-connect-oracle-database)
+   - https://learn.microsoft.com/en-us/power-query/connectors/oracle-database
+   - https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-connect-oracle-database
 
-- Oracle's official documentation to download the driver: [https://www.oracle.com/database/technologies/appdev/ocmt.html](https://www.oracle.com/database/technologies/appdev/ocmt.html)
+- Oracle's official documentation to download the driver: https://www.oracle.com/database/technologies/appdev/ocmt.html
