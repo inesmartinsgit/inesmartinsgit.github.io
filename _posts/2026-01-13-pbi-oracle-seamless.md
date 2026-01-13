@@ -76,7 +76,7 @@ To do this, run the following command:
 
 You will see something like this:
 
-<img width="1814" height="178" alt="image" src="https://github.com/user-attachments/assets/9646c2e8-eb62-4380-8630-829597106a3d" />
+<img  height="130" alt="image" src="https://github.com/user-attachments/assets/9646c2e8-eb62-4380-8630-829597106a3d" />
 
 This confirms that the driver is installed and I can confirm that is Version 4.122.19.1 (the naming convention is explained in depth in Oracle support pages if you want more information).
 
