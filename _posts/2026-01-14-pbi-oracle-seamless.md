@@ -7,7 +7,7 @@ title: "Seamless Power BI and Oracle Integration: Key Learnings & Setup Tips"
 <br>
 
 **Connecting Power BI to Oracle on-premises databases** is a common scenario for business intelligence professionals, but it’s also a source of frequent frustration. 
-<br>
+
 Over the years, I’ve encountered and helped configure and troubleshoot a wide range of issues that almost always trace back to **setup and configuration missteps**.
 
 This post is for Power BI users and IT administrators who want to avoid the most common pitfalls when integrating Power BI with Oracle. <br>
@@ -21,8 +21,6 @@ By the end of this post, you will know:
 - Which components are required and why.
 - How to avoid configuration mistakes that can block your connection.
 - How to install and validate your setup correctly.
-
-<br>
 
 Let’s dive in and make your Power BI and Oracle integration as seamless as possible !
 
@@ -52,18 +50,14 @@ ODP.NET unmanaged is free and can be downloaded from Oracle documentation: [Down
 
 The latest versions are packaged into **OCMT - Oracle Client for Microsoft Tools**, a graphical installer.
 
-<br>
 
 ⚠️ **Warning:** The installer is easy to use but try to resist the temptation of clicking NEXT without reading. There are critical steps that require your input and will break your setup if not correct. 
 
-<br>
 
 In the example below, if I leave the default location under my user, I can only use the driver with Power BI Desktop and not the OPDG:
 
 <img height="400" alt="image" src="https://github.com/user-attachments/assets/08d8b503-7a78-4cfd-a78d-86876e010423" />
 
-<br>
-<br>
 
 This driver needs to be **installed on each client machine** where you want to connect to Oracle. 
 
@@ -86,7 +80,6 @@ You will see something like this:
 
 <img  height="130" alt="image" src="https://github.com/user-attachments/assets/9646c2e8-eb62-4380-8630-829597106a3d" />
 
-<br>
 
 This confirms that the driver is installed and, for this example, it confirms that is Version 4.122.19.1 (the naming convention is explained in depth in Oracle documentation pages if you want more information).
 
@@ -104,17 +97,12 @@ From the BI side, you can consider testing with Power BI desktop which is easier
 
 You can even remove the BI client tool from the setup and test the driver directly using PowerShell or writing your own C\# application (more on that here: [Using ODP.NET Client Provider in a Simple Application (oracle.com)](https://docs.oracle.com/database/121/ODPNT/intro005.htm))
 
-<br>
- 
 If you want to use **PowerShell**, below is a sample script to open the connection, getting the schema, running a query, reading some results and closing the schema. You can customize it with your own connection string, query and results to be read.
 
 This script uses **EZCONNECT** (this is called **easy connect naming** and, in essence, allows specifying directly the host name, port and service name).
 
-<br>
-
 ⚠️**Warning**: The script is using hard-coded username/password which is not advised for production environments. For those scenarios, I recommend using secure methods to store the credentials.
 
-<br>
 
 ```
 #Create the connection string
@@ -145,9 +133,6 @@ I recommend by starting to copy the sample of this file provided by OCMT. Depend
 
 <img  height="200" alt="image" src="https://github.com/user-attachments/assets/24b54eae-9b57-4422-abf0-03b99dad6093" />
 
-<br>
-<br>
-
 You can copy both files to the location you specified during the OCMT installation.
 
 For my example, I specified: **C:\Oracle\network\admin** so this is where I copied the samples to.
@@ -157,9 +142,6 @@ Then I edited the samples and specified SQLNET.AUTHENTICATION_SERVICES to NONE (
 For more information on this, consult Oracle's documentation such as [Local Naming Parameters in the tnsnames.ora File](https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/local-naming-parameters-in-tns-ora-file.html).
 
 <img height="600" alt="image" src="https://github.com/user-attachments/assets/3e390bcf-6f13-4283-8d09-9f2a56db7c69"/>
-
-<br>
-<br>
 
 And finally, I connected by using the same PowerShell sample with the **alias** defined by me in the TNSNAMES.ORA file (*inesalias*) instead of EZCONNECT.
 
@@ -198,6 +180,8 @@ I’ll be sharing more real-world troubleshooting scenarios and advanced tips in
 
 Your feedback and topic suggestions are always welcome.
 
+<br>
+<br>
 ---
 
 References:
