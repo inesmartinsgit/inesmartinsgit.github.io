@@ -512,19 +512,19 @@ From the client network trace:
 - Then same query trying to be retransmitted.
 - But then the connection is closed.
 
-<img width="1906" height="1141" alt="image" src="https://github.com/user-attachments/assets/eadf2a67-4c0c-4340-922b-3c6d6d9cc00a" />
+<img width="1200" alt="image" src="https://github.com/user-attachments/assets/eadf2a67-4c0c-4340-922b-3c6d6d9cc00a" />
 
 From the server network trace, the same packet cannot be found.
 
-<img width="1896" height="1133" alt="image" src="https://github.com/user-attachments/assets/3d9bdd92-ce86-4825-8a5a-3d66b6b57de3" />
+<img width="1200" alt="image" src="https://github.com/user-attachments/assets/3d9bdd92-ce86-4825-8a5a-3d66b6b57de3" />
 
 The previous packet in the same stream can be found on the server side matching the previous query at 15:02 as seen in the Power BI mashup logs and SQL NET logs.
 
-<img width="1923" height="1135" alt="image" src="https://github.com/user-attachments/assets/5667c792-1b83-47a5-8227-4d8d89a2a842" />
+<img width="1200" alt="image" src="https://github.com/user-attachments/assets/5667c792-1b83-47a5-8227-4d8d89a2a842" />
 
 Checking on the server network trace using theclient VM ip 20.14.72.115, there is a time gap with no traces between 15:02 and 15:11.
 
-<img width="1911" height="670" alt="image" src="https://github.com/user-attachments/assets/4bc35660-6ff0-4301-81b8-eacfd1ac170f" />
+<img width="1200" alt="image" src="https://github.com/user-attachments/assets/4bc35660-6ff0-4301-81b8-eacfd1ac170f" />
 
 
 To summarize:
