@@ -21,7 +21,7 @@ Forcing a **Refresh Preview** fixed it temporarily, but that only confirmed some
 
 ⚠️ Was something on my machine interfering with the connection? <br>
 
-<img width="1733" height="540" alt="image" src="https://github.com/user-attachments/assets/4298e793-56b9-45d7-888a-0fca614b3c6c" />
+<img width="1200" alt="image" src="https://github.com/user-attachments/assets/4298e793-56b9-45d7-888a-0fca614b3c6c" />
 
 <br>
 All I wanted was to get back to building my report, so I created a clean Azure VM to host my Power BI desktop and Oracle driver ODP.NET unmanaged (for guidance on this, refer to my previous blog post - [Seamless Power BI and Oracle Integration: Key Learnings & Setup Tips](https://inesmartinsgit.github.io/2026/01/14/pbi-oracle-seamless.html) ).  <br>
