@@ -125,5 +125,3 @@ Guess what?
 
 <img width="1209" height="350" alt="image" src="https://github.com/user-attachments/assets/f4194716-62d5-42bc-9d23-894aefa9d81d" />
 
-
-<img width="925" height="3773" alt="image" src="https://github.com/user-attachments/assets/fd5f230e-8fb5-49b2-9ff0-addb18ac7c65" />
