@@ -360,7 +360,7 @@ Knowing the mashup container process ID PID = <span style="background-color:#D9F
 
 <br>
 
-<div style="font-style: italic; white-space: pre; font-family: Consolas, monospace;">
+<div style="font-style: italic; overflow-x:auto;">
 Engine/IO/Db/Oracle/Connection/Open {"Start":<span style="background: grey;">"2026-01-24T15:09:48.9553912Z"</span>,"Action":<strong>"Engine/IO/Db/Oracle/Connection/Open"</strong>strong>,"ResourceKind":"Oracle","ResourcePath":"20.163.1.157:1521/ines.internal.cloudapp.net","HostProcessId":"956","PartitionKey":"Section1/LOCATIONS/2","Server":"20.163.1.157:1521/ines.internal.cloudapp.net","RequireEncryption":"False","ConnectionTimeout":"15","ConnectionId":"957c17d0-db30-4833-a3ab-70b9c1e43935","ProductVersion":"2.149.1054.0 (25.11)+fe0a1c0f2fc6e9cf0939a7efabedc7cdb3358bad","ActivityId":"86d59d77-7be2-43f3-afc3-8dfab4ef4b1b","Process":"Microsoft.Mashup.Container.NetFX45","Pid":4960,"Tid":1,"Duration":"00:00:00.0004251"}
 </div>
 
