@@ -254,5 +254,6 @@ When checking the active Oracle sessions, the technical information in the error
 
 </div>
 
+From this I knew that:
 
 
