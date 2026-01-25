@@ -359,7 +359,7 @@ From this process information I knew:
 Knowing the mashup container process ID PID = <span style="background-color:#D9FAAA">4960</span> obtained from the session info,  I was able to quickly locate the log file to analyze: _**Microsoft.Mashup.Container.NetFX45.<span style="background-color:#D9FAAA">4960</span>.2026-01-24T15-02-09-350038.log**_
 
 
-<div style="font-family: Consolas, monospace; white-space: pre-wrap;">
+<div style="white-space: pre-wrap; font-style: italic; word-wrap: break-word; max-width: 100%;">
 
 {"Start":"<span style='background:#DEDEDE;'>2026-01-24T15:09:48.9553912Z</span>","Action":"Engine/IO/Db/Oracle/Connection/Open","ResourceKind":"Oracle","ResourcePath":"20.163.1.157:1521/ines.internal.cloudapp.net","HostProcessId":"956","PartitionKey":"Section1/LOCATIONS/2","Server":"20.163.1.157:1521/ines.internal.cloudapp.net","RequireEncryption":"False","ConnectionTimeout":"15","ConnectionId":"957c17d0-db30-4833-a3ab-70b9c1e43935","ProductVersion":"2.149.1054.0 (25.11)+fe0a1c0f2fc6e9cf0939a7efabedc7cdb3358bad","ActivityId":"86d59d77-7be2-43f3-afc3-8dfab4ef4b1b","Process":"Microsoft.Mashup.Container.NetFX45","Pid":4960,"Tid":1,"Duration":"00:00:00.0004251"}
 
