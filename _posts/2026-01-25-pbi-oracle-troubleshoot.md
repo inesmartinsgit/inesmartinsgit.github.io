@@ -124,3 +124,49 @@ Guess what?
 
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/f4194716-62d5-42bc-9d23-894aefa9d81d" />
 
+# Collecting Clues Through Logs
+
+To trace what was happening I started gathering logs from every part of the setup.
+Here’s what I enabled:
+- On the Client:
+  - The Client tools (Power BI Desktop / PowerShell) - client logs
+  - ODP.NET unmanaged driver - Oracle driver logs
+  - Client VM connectivity:
+    - Network trace - I prefer using Wireshark but you can use any tool you are comfortable.
+    - SQL NET logs - Oracle client
+			
+- On the Server:
+  - Oracle server:
+    - Sessions
+	- Processes
+  - Server VM connectivity: 
+	- Network trace
+	- SQL NET logs - oracle server
+		
+
+The guidance below come from my Oracle 19 database and from a bit of trial‑and‑error testing. <br>
+You may need to adjust the steps for your own version, but the overall approach remains the same. <br>
+If you have feedback or ideas to improve it, I’d love to hear them!<br>
+
+## Setting Up Client Logs
+
+### Power BI Desktop logs
+- Collect following the steps from Microsoft's documentation https://learn.microsoft.com/en-us/power-bi/fundamentals/desktop-diagnostics
+
+### ODP.NET unmanaged driver logs
+- Using the registry editor, navigate to the driver folder: e.g. _Computer\HKEY_LOCAL_MACHINE\SOFTWARE\ORACLE\ODP.NET\4.122.19.1_
+- Manually create 2 string values:
+  - **TraceFileLocation** - specifies the location of logs
+  - **TraceLevel = 7** - to enable all traces
+- Restart the machine
+
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/9b4605b6-15f6-4277-add4-4c8fec191165" />
+
+### SQL NET logs - Oracle client
+	
+- Edit the sqlnet.ora file and add the following:
+
+
+
+
+
