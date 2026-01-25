@@ -355,9 +355,7 @@ From this process information I knew:
 
 #### Power BI Desktop logs
 
-
 Knowing the mashup container process ID PID = <span style="background-color:#D9FAAA">4960</span> obtained from the session info,  I was able to quickly locate the log file to analyze: _**Microsoft.Mashup.Container.NetFX45.<span style="background-color:#D9FAAA">4960</span>.2026-01-24T15-02-09-350038.log**_
-
 
 <div style="white-space: pre-wrap; font-style: italic; word-wrap: break-word; max-width: 100%;">
 
@@ -376,7 +374,7 @@ Before the error occurs, it's visible the connection open request and the query 
 
 Knowing the Power BI mashup container process ID PID = <span style="background-color:#D9FAAA">4960</span> obtained from the session info, I was able to** convert it to HEX** to find the driver log file: **<span style="background-color:#D9FAAA">4960</span> (DEC) = <span style="background-color:#D1B69D">1360</span> (HEX)** - _**MICROSOFT.MASHUP.CONTAINER.NETFX45.EXE_PID_<span style="background-color:#D1B69D">1360</span>_DATE_2026_01_24_TIME_15_02_14_000333.trc**_
 
-<div style="font-style: italic; white-space: pre-wrap; word-wrap: break-word; max-width: 100%;">	
+<div style="white-space: pre-wrap; font-style: italic; word-wrap: break-word; max-width: 100%;">
 TIME:<span style="background:#DEDEDE;">2026/01/24-15:09:48:961</span> TID:27a0  OracleConnection::Open() => Calling RequestBegin
 (…)
 TIME:2026/01/24-15:09:48:961 TID:27a0  (INFO) (OracleConnectionOCP.Open) Pool Id=531559270 PooledConCtx=40026340 sessid=<span style="background-color:#AAFABE">396</span> serial=<span style="background-color:#42D4BC">44130</span> inst=ines ConCtx=(2405dcbd1a0)
@@ -399,4 +397,6 @@ TIME:<span style="background:#DEDEDE;">2026/01/24-15:10:08:014</span> TID:27a0  
 Process ID: 7900
 Session ID: 396 Serial number: 44130</span>
 </div>
+
+Once again, before the error it's visible the connection open request and the query sent to the server with the timestamps and info matching the Power BI mashup logs.
 
