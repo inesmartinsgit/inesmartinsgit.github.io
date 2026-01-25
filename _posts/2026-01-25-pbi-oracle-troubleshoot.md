@@ -244,7 +244,9 @@ Session ID: 396 Serial number: 44130<br>
 &nbsp;&nbsp;&nbsp;&nbsp;ErrorCode=-2147467259<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color:#EBAAFA">NativeError=3135</span><br>_
 
-When checking the active Oracle sessions, the technical information in the error correlates directly with the information I needed to proceed further on checking the client side logs.
+### Oracle Server - Session and Process
+
+When checking the active **Oracle session**, the technical information in the error correlates directly with the information I needed to proceed further on checking the client side logs (below table is cropped to include relevant information).
 
 
 <div style="overflow-x:auto;">
@@ -304,10 +306,62 @@ When checking the active Oracle sessions, the technical information in the error
 </div>
 
 <br>
-From this I knew:
+From this session information I knew:
 - The **Mashup container PID =  <span style="background-color:#D9FAAA">4960</span>.** This allowed me to identify the mashup file directly
 - Was leveraging the **Oracle driver TID = <span style="background-color:#FADAAA">10144</span>.** This allowed me to identify the sqlnet logs from client side directly	
 - Using the **port from client side = <span style="background-color:#FAAABF">50679</span>.** This helped me narrow down the network traces.
 
+When checking the active **Oracle process**, I can do the same but correlating on the server side:
 
 
+<div style="overflow-x:auto;">
+
+<table>
+  <tr>
+    <th>ADDR</th>
+    <th>PID</th>
+    <th>SOSID</th>
+    <th>SPID</th>
+    <th>STID</th>
+    <th>EXECUTION_TYPE</th>
+    <th>PNAME</th>
+    <th>USERNAME</th>
+    <th>SERIAL#</th>
+    <th>TERMINAL</th>
+    <th>PROGRAM</th>
+  </tr>
+	
+  <tr>
+    <td>00007FF82F573A20</td>
+    <td>59</td>
+    <td>7900</td>
+    <td><span style="background-color:#829FED">7900</span></td>
+    <td>0</td>
+    <td>THREAD</td>
+    <td></td>
+    <td>OracleServiceIN</td>
+    <td>8</td>
+    <td>VMoracleserver</td>
+    <td>ORACLE.EXE (SHAD)</td>
+  </tr>
+</table>
+
+</div>
+
+From this process information I knew:
+- The **Server PID = <span style="background-color:#829FED">7900</span>.** This allowed me to identify the sqlnet logs from server side directly.
+
+### Oracle Client log analysis
+
+#### Power BI Desktop logs
+
+
+Knowing the mashup container process ID PID = <span style="background-color:#D9FAAA">4960</span> obtained from the session info,  I was able to quickly locate the log file to analyze: _**Microsoft.Mashup.Container.NetFX45.<span style="background-color:#D9FAAA">4960</span>.2026-01-24T15-02-09-350038.log**_
+
+<br>
+
+_{"Start":"2026-01-24T15:09:48.9553912Z","Action":"**Engine/IO/Db/Oracle/Connection/Open**","ResourceKind":"Oracle","ResourcePath":"20.163.1.157:1521/ines.internal.cloudapp.net","HostProcessId":"956","PartitionKey":"Section1/LOCATIONS/2","Server":"20.163.1.157:1521/ines.internal.cloudapp.net","RequireEncryption":"False","ConnectionTimeout":"15","ConnectionId":"957c17d0-db30-4833-a3ab-70b9c1e43935","ProductVersion":"2.149.1054.0 (25.11)+fe0a1c0f2fc6e9cf0939a7efabedc7cdb3358bad","ActivityId":"86d59d77-7be2-43f3-afc3-8dfab4ef4b1b","Process":"Microsoft.Mashup.Container.NetFX45","Pid":4960,"Tid":1,"Duration":"00:00:00.0004251"}_
+	
+_{"Start":"2026-01-24T15:09:48.9558422Z","Action":"**Engine/IO/Db/Oracle/Command/ExecuteDbDataReader**","ResourceKind":"Oracle","ResourcePath":"20.163.1.157:1521/ines.internal.cloudapp.net","HostProcessId":"956","PartitionKey":"Section1/LOCATIONS/2","Server":"20.163.1.157:1521/ines.internal.cloudapp.net","CommandText":<span style="background-color:#F6FAAA">"select \"$Ordered\".\"REGION_ID\",\r\n    \"$Ordered\".\"REGION_NAME\"\r\nfrom \r\n(\r\n    select \"_\".\"REGION_ID\",\r\n        \"_\".\"REGION_NAME\"\r\n    from \"HR\".\"REGIONS\" \"_\"\r\n    where \"_\".\"REGION_ID\" = 3\r\n) \"$Ordered\"\r\norder by \"$Ordered\".\"REGION_ID\"\r\nfetch next 4096 rows only"</span>,"CommandTimeout":"600","ConnectionId":"957c17d0-db30-4833-a3ab-70b9c1e43935","Behavior":"Default","Exception":"Exception:\r\nExceptionType: Oracle.DataAccess.Client.OracleException, Oracle.DataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342\r\n<span style="background-color:#F77059">Message: ORA-03135: connection lost contact\nProcess ID: 7900\nSession ID: 396 Serial number: 44130</span>\r\nStackTrace:\n   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, String procedure, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, Boolean bCheck, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleCommand.ExecuteReader(Boolean requery, Boolean fillRequest, CommandBehavior behavior)\r\n   at Oracle.DataAccess.Client.OracleCommand.ExecuteDbDataReader(CommandBehavior behavior)\r\n   at Microsoft.Mashup.Engine1.Library.Common.TracingDbCommand.<>n__0(CommandBehavior behavior)\r\n   at Microsoft.Mashup.Engine1.Library.Common.TracingDbCommand.<>c__DisplayClass6_0.<ExecuteDbDataReader>b__0(IHostTrace trace)\r\n   at Microsoft.Mashup.Engine1.Library.Common.Tracer.TraceCommon[T](IHostTrace trace, Func`2 func)\r\n\r\n\r\n","ProductVersion":"2.149.1054.0 (25.11)+fe0a1c0f2fc6e9cf0939a7efabedc7cdb3358bad","ActivityId":"86d59d77-7be2-43f3-afc3-8dfab4ef4b1b","Process":"Microsoft.Mashup.Container.NetFX45","Pid":4960,"Tid":1,"Duration":"00:00:19.4224248"}_
+	
+_{"Start":"2026-01-24T15:10:08.3951188Z","Action":"**Engine/IO/Db/Oracle/Connection/Close**","ResourceKind":"Oracle","ResourcePath":"20.163.1.157:1521/ines.internal.cloudapp.net","HostProcessId":"956","PartitionKey":"Section1/LOCATIONS/2","Server":"20.163.1.157:1521/ines.internal.cloudapp.net","ConnectionId":"957c17d0-db30-4833-a3ab-70b9c1e43935","ProductVersion":"2.149.1054.0 (25.11)+fe0a1c0f2fc6e9cf0939a7efabedc7cdb3358bad","ActivityId":"86d59d77-7be2-43f3-afc3-8dfab4ef4b1b","Process":"Microsoft.Mashup.Container.NetFX45","Pid":4960,"Tid":1,"Duration":"00:00:00.0099732"}_
