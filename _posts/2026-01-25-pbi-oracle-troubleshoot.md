@@ -372,7 +372,7 @@ Before the error occurs, it's visible the connection open request and the query 
 
 #### ODP.NET driver logs
 
-Knowing the Power BI mashup container process ID PID = <span style="background-color:#D9FAAA">4960</span> obtained from the session info, I was able to** convert it to HEX** to find the driver log file: **<span style="background-color:#D9FAAA">4960</span> (DEC) = <span style="background-color:#D1B69D">1360</span> (HEX)** - _**MICROSOFT.MASHUP.CONTAINER.NETFX45.EXE_PID_<span style="background-color:#D1B69D">1360</span>_DATE_2026_01_24_TIME_15_02_14_000333.trc**_
+Knowing the Power BI mashup container process ID PID = <span style="background-color:#D9FAAA">4960</span> obtained from the session info, I was able to **convert it to HEX** to find the driver log file: **<span style="background-color:#D9FAAA">4960</span> (DEC) = <span style="background-color:#D1B69D">1360</span> (HEX)** - _**MICROSOFT.MASHUP.CONTAINER.NETFX45.EXE_PID_<span style="background-color:#D1B69D">1360</span>_DATE_2026_01_24_TIME_15_02_14_000333.trc**_
 
 <div style="white-space: pre-wrap; font-style: italic; font-size:12px; word-wrap: break-word; max-width: 100%;">
 	
