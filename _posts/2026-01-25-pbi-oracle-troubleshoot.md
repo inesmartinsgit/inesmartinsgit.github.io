@@ -246,13 +246,63 @@ Session ID: 396 Serial number: 44130<br>
 
 When checking the active Oracle sessions, the technical information in the error correlates directly with the information I needed to proceed further on checking the client side logs.
 
-<div style="overflow-x:auto; display:block;">
-	
-| SADDR | SID | SERIAL# | AUDSID | PADDR | USER# | USERNAME | COMMAND | OWNERID | TADDR | LOCKWAIT | STATUS | SERVER | SCHEMA# | SCHEMANAME | OSUSER | PROCESS | MACHINE | PORT | TERMINAL | PROGRAM | TYPE |
-|-------|-----|---------|--------|--------|--------|-----------|----------|----------|--------|-----------|---------|---------|-----------|-------------|---------|----------|----------|--------|-----------|-----------|------|
-| 00007FF82FAEB420 | <span style="background-color:#AAFABE">396</span> | 44130 | 40031 | 00007FF82F573A20 | 107 | HR | 0 | 2147483644 |  |  | INACTIVE | DEDICATED | 107 | HR | inmartin | <span style="background-color:#D9FAAA">4960</span>:<span style="background-color:#FADAAA">10144</span> | WORKGROUP\VMoracleclient | <span style="background-color:#FAAABF">50679</span> | VMoracleclient | **Microsoft.Mashup.Container.NetFX45.exe** | USER
+
+<div style="overflow-x:auto;">
+
+<table>
+  <tr>
+    <th>SADDR</th>
+    <th>SID</th>
+    <th>SERIAL#</th>
+    <th>AUDSID</th>
+    <th>PADDR</th>
+    <th>USER#</th>
+    <th>USERNAME</th>
+    <th>COMMAND</th>
+    <th>OWNERID</th>
+    <th>TADDR</th>
+    <th>LOCKWAIT</th>
+    <th>STATUS</th>
+    <th>SERVER</th>
+    <th>SCHEMA#</th>
+    <th>SCHEMANAME</th>
+    <th>OSUSER</th>
+    <th>PROCESS</th>
+    <th>MACHINE</th>
+    <th>PORT</th>
+    <th>TERMINAL</th>
+    <th>PROGRAM</th>
+    <th>TYPE</th>
+  </tr>
+
+  <tr>
+    <td>00007FF82FAEB420</td>
+    <td><span style="background-color:#AAFABE">396</span></td>
+    <td>44130</td>
+    <td>40031</td>
+    <td>00007FF82F573A20</td>
+    <td>107</td>
+    <td>HR</td>
+    <td>0</td>
+    <td>2147483644</td>
+    <td></td>
+    <td></td>
+    <td>INACTIVE</td>
+    <td>DEDICATED</td>
+    <td>107</td>
+    <td>HR</td>
+    <td>inmartin</td>
+    <td><span style="background-color:#D9FAAA">4960</span>:<span style="background-color:#FADAAA">10144</span></td>
+    <td>WORKGROUP\VMoracleclient</td>
+    <td><span style="background-color:#FAAABF">50679</span></td>
+    <td>VMoracleclient</td>
+    <td><b>Microsoft.Mashup.Container.NetFX45.exe</b></td>
+    <td>USER</td>
+  </tr>
+</table>
 
 </div>
+
 
 From this I knew that:
 
