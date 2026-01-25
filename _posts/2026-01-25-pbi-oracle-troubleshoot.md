@@ -406,7 +406,8 @@ Once again, before the error it's visible the connection open request and the qu
 #### SQLNET Client Logs
 
 Knowing it was leveraging the driver TID = 10144 I was able to find the SLQ.NET logs: client_10144.trc
-	
+
+<div style="white-space: pre-wrap; font-style: italic; font-size:12px; word-wrap: break-word; max-width: 100%;">
 	(10144) [24-JAN-2026 15:02:14:738] nsmore2recv: exit (0)
 	(10144) [24-JAN-2026 15:09:48:960] nioctl: entry
 	(…)
@@ -455,6 +456,7 @@ Knowing it was leveraging the driver TID = 10144 I was able to find the SLQ.NET 
 	(10144) [24-JAN-2026 15:10:07:897] nsrdr: error exit
 	(…)
 	(10144) [24-JAN-2026 15:10:07:904] nioqer:  returning err = 3135
+</div>
 
 There is a time gap between 15:02 and 15:09 (while I was not using the Power BI desktop).
 Then at 15h09 the logs continue and, we see the data packet being sent: from the oracle documentation: NSPTDA is used with data packet types (se references below).
@@ -483,6 +485,7 @@ The error codes afterwards are also explained in the Oracle documentation (se re
 
 Knowing the server process ID  PID = 7900  obtained from the process info,  I was able to quickly locate the log file to analyze: server_7900.trc
 
+<div style="white-space: pre-wrap; font-style: italic; font-size:12px; word-wrap: break-word; max-width: 100%;">
 	[24-JAN-2026 15:02:14:741] nsbasic_bsd: packet dump
 	[24-JAN-2026 15:02:14:741] nsbasic_bsd: 00 00 02 BF 06 00 00 00  |........|
 (…)
@@ -496,22 +499,22 @@ Knowing the server process ID  PID = 7900  obtained from the process info,  I wa
 	[24-JAN-2026 15:02:14:742] nsbasic_bsd: exit (0)
 	[24-JAN-2026 15:02:14:742] nsbasic_brc: entry: oln/tot=0,prd=0
 	[24-JAN-2026 15:02:14:742] nttfprd: entry
-
+</div>
 Last traces show the last packet dump which was successful but the timestamp was before the issue happens, matching the previous set of logs that I could see from the client logs at 15:02.
 
 
 ### Client-Server Network Trace (wireshark)
 
 From the client network trace:
-	• We confirm the port from client side is 50679 as seen in the session from Oracle
-	• We can see the packet matching the query we saw from the client side logs.
-	• Then same query trying to be retransmitted.
-	• But then the connection is closed.
+- I confirmed the port from client side is 50679 as seen in the session from Oracle
+- I could see the packet matching the query that I saw from the client side logs.
+- Then same query trying to be retransmitted.
+- But then the connection is closed.
 
 <img width="1906" height="1141" alt="image" src="https://github.com/user-attachments/assets/eadf2a67-4c0c-4340-922b-3c6d6d9cc00a" />
 
-From the server network trace:
-	• The same packet cannot be found.
+From the server network trace, the same packet cannot be found.
+
 <img width="1896" height="1133" alt="image" src="https://github.com/user-attachments/assets/3d9bdd92-ce86-4825-8a5a-3d66b6b57de3" />
 
 The previous packet in the same stream can be found on the server side matching the previous query at 15:02 as seen in the Power BI mashup logs and SQL NET logs.
@@ -524,42 +527,43 @@ Checking on the server network trace using theclient VM ip 20.14.72.115, there i
 
 
 To summarize:
-	• Power BI desktop generated correctly the query to get the data and leveraged the oracle driver to send the query to the server.
-	• The packet was sent by client machine but never got to the server machine.
-	• Neither the client nor the server VMs had any idle‑timeout settings or firewall rules that could explain the drop.
+- Power BI desktop generated correctly the query to get the data and leveraged the oracle driver to send the query to the server.
+- The packet was sent by client machine but never got to the server machine.
+- Neither the client nor the server VMs had any idle‑timeout settings or firewall rules that could explain the drop.
 
 Somehow the connection was getting "lost in Azureland" and driving me a bit crazy.
 
 # The Truth Behind the Mystery
 
 After correlating the logs and realizing the packet never reached the server, I went back to the basics and reviewed my setup.
-That’s when I uncovered a critical detail in Azure’s networking documentation: There is a by design limitation on Azure VMs: There is "an adjustable inbound originated flow idle timeout of 4-30 minutes, with a default of 4 minutes, and fixed outbound originated flow idle timeout of 4 minutes."
- - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+
+That’s when I uncovered a critical detail in [Azure’s networking documentation](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses).<br> 
+There is a by design limitation on Azure VMs: "an adjustable inbound originated flow idle timeout of 4-30 minutes, with a default of 4 minutes, and fixed outbound originated flow idle timeout of 4 minutes".<br>
 Unfortunately I couldn't find any logs from Azure showing the connection drop explicitly but was able to confirm this was the root cause by applying the resolution steps described below.
 
 
 # What Actually Solved It
 
 To fix the issue, I narrowed it down to a few workable options:
+- If client machine is not an azure VM, I can increase the inbound idle timeout up to 30m (inbound is configurable for the server VM).
+- If I want to keep using the Azure VM as the client:
+  - Switch to using the private IP, avoiding the outbound idle timeout entirely, or
+  - Configure a keep‑alive mechanism so the connection never becomes idle long enough to be dropped.
 
-	• If client machine is not an azure VM, I can increase the inbound idle timeout up to 30m (inbound is configurable for the server VM).
-	• If I want to keep using the Azure VM as the client:
-		○ Switch to using the private IP, avoiding the outbound idle timeout entirely, or
-		○ Configure a keep‑alive mechanism so the connection never becomes idle long enough to be dropped.
-
-On the server side, enabling a keep‑alive was simple. 
-I added the following parameter to the sqlnet config file, setting the interval to the number of minutes I wanted (in this case, 1 minute):
-SQLNET.EXPIRE_TIME=1
+On the server side, enabling a keep‑alive was simple. <br>
+I added the following parameter to the sqlnet config file, setting the interval to the number of minutes I wanted (in this case, 1 minute): **SQLNET.EXPIRE_TIME=1**
 
 I tested each of these options independently, and all of them successfully resolved the error, confirming that the root cause was the Azure VM public IP idle‑timeout limitation.
 
 
 # Wrapping Up the Mystery
+
 In the end, what looked like an Oracle‑side issue turned out to be a much simpler but easily overlooked network behavior dictated by Azure’s default idle timeout. 
-By walking through logs at each layer (Power BI desktop (client application), ODP.NET unmanaged Oracle driver, SQLNet logs on server and client and network traces), the root cause revealed itself clearly: the query never reached the server because the connection was silently dropped mid‑path.
+
+By walking through logs at each layer (Power BI desktop (client application), ODP.NET unmanaged Oracle driver, SQLNet logs on server and client and network traces), the root cause revealed itself clearly: the query never reached the server because the connection was silently dropped mid‑path. <br>
 Understanding the full chain of dependencies was what ultimately gave me clarity. 
 
-I hope this breakdown helps you accelerate your own investigations the next time a connection mysteriously “vanishes.” 
+I hope this breakdown helps you accelerate your own investigations the next time a connection mysteriously “vanishes.”  <br>
 If you’ve encountered similar challenges or found alternative approaches, I’d love to learn from your experience too!
 
 ---
