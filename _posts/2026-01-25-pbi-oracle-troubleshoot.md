@@ -234,7 +234,7 @@ Based on the error message, immediately gave me the clues I needed.
 
 _DataSource.Error: Oracle: ORA-03135: connection lost contact<br>
 <span style="background-color: blue">Process ID: 7900</span><br>
-<span style="background-color: green">Session ID: 396</span> <span style="background-color: teal">Serial number: 44130 </span><br>
+<span style="background-color: green">Session ID: 396</span> <span style="background-color: 309181">Serial number: 44130 </span><br>
 Details:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;DataSourceKind=Oracle<br>
 &nbsp;&nbsp;&nbsp;&nbsp;DataSourcePath=20.163.1.157:1521/ines.internal.cloudapp.net<br>
