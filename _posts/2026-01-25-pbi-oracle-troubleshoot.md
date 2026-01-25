@@ -148,12 +148,12 @@ The guidance below come from my Oracle 19 database and from a bit of trial‑and
 You may need to adjust the steps for your own version, but the overall approach remains the same. <br>
 If you have feedback or ideas to improve it, I’d love to hear them!<br>
 
-## Setting Up Client Logs
+### Setting Up Client Logs
 
-### Power BI Desktop logs
+#### Power BI Desktop logs
 - Collect following the steps from Microsoft's documentation https://learn.microsoft.com/en-us/power-bi/fundamentals/desktop-diagnostics
 
-### ODP.NET unmanaged driver logs
+#### ODP.NET unmanaged driver logs
 - Using the registry editor, navigate to the driver folder: e.g. _Computer\HKEY_LOCAL_MACHINE\SOFTWARE\ORACLE\ODP.NET\4.122.19.1_
 - Manually create 2 string values:
   - **TraceFileLocation** - specifies the location of logs
@@ -162,7 +162,7 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/9b4605b6-15f6-4277-add4-4c8fec191165" />
 
-### SQL NET logs - Oracle client
+#### SQL NET logs - Oracle client
 	
 - Edit the sqlnet.ora file and add the following:
 
