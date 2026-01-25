@@ -166,16 +166,83 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 	
 - Edit the sqlnet.ora file and add the following:
 
-
-| Trace Config | Description |
+| Trace Config to Add | Description |
 |----------|----------|
-| TRACE_LEVEL_CLIENT = 16 | Support level logs (maximum info)  |
+| TRACE_LEVEL_CLIENT = 16 | Support level logs (maximum info). |
 | TRACE_FILE_CLIENT = client | Name of the log file. <br> It includes the process identifier (PID) appended to the name automatically. |
-| TRACE_DIRECTORY_CLIENT = C:\Users\inmartin\Oracle\network\admin\sqlnetlogs | Folder where the traces are located. <br> Be careful with possible disk space issues and if possible select a non C:\ drive |
-| TRACE_TIMESTAMP_CLIENT = ON | To add a timestamp to the logs inside the file |
-| DIAG_ADR_ENABLED=OFF | Required so we can configure all these parameters for the logs |
-| TRACE_UNIQUE_CLIENT=ON | Unique trace file is created for each client trace session |
+| TRACE_DIRECTORY_CLIENT = C:\Users\inmartin\Oracle\network\admin\sqlnetlogs | Folder where the traces are located. <br> Be careful with possible disk space issues and if possible select a non C:\ drive. |
+| TRACE_TIMESTAMP_CLIENT = ON | To add a timestamp to the logs inside the file. |
+| DIAG_ADR_ENABLED=OFF | Required so we can configure all these parameters for the logs. |
+| TRACE_UNIQUE_CLIENT=ON | Unique trace file is created for each client trace session. |
+
+- Navigate to the folder.
+- Logs can be opened using notepad or another text editor.
+
+### Setting Up Sever Logs
+
+#### Oracle server: Sessions and Processes
 	
+- Using Oracle SQL developer, connect to system and run:
+  - **select * from v$session;**
+  - **select * from v$process;**
+
+- Logs can be exported to several format (I prefer csv).
+
+#### SQL NET logs - Oracle server and listener
+	
+- For this scenario there are no errors related to listener but I'll include them in the configuration in case you will find it useful.
+
+##### SQL NET logs for Oracle server
+	
+- Edit the sqlnet.ora file and add the following:
+
+| Trace Config to Add | Description |
+|----------|----------|
+| TRACE_LEVEL_SERVER = 16  | Support level logs (maximum info). |
+| TRACE_FILE_SERVER = server  | Name of the log file. <br> It will include the process identifier (pid) is appended to the name automatically. |
+| TRACE_DIRECTORY_SERVER = C:\OracleServer\network\admin\sqlnetlogs | Folder where the traces are located. <br> | Be careful with possible disk space issues and if possible select a non C:\drive. |
+| TRACE_TIMESTAMP_SERVER = ON | To add a timestamp to the logs inside the file. |
+| DIAG_ADR_ENABLED= OFF | Required so we can configure all these parameters for the logs (ADR = Automatic Diagnostic Repository). |
+
+- Navigate to the folder.
+- Logs can be opened using notepad or another text editor.
+
+##### SQL NET logs for Oracle listener
+	
+- Edit the listener.ora file and add the following:
+
+| Trace Config to Add | Description |
+|----------|----------|
+| TRACE_LEVEL_LISTENER = 16 | Support level logs (maximum info). |
+| TRACE_FILE_LISTENER = listener | Name of the log file. It will include the process identifier (pid) is appended to the name automatically.|
+| TRACE_DIRECTORY_LISTENER = C:\OracleServer\network\admin\listenerlogs | Folder where the traces are located. Be careful with possible disk space issues and if possible select a non C:\drive. |
+| TRACE_TIMESTAMP_LISTENER = ON | To add a timestamp to the logs inside the file. |
+| DIAG_ADR_ENABLED_LISTENER= OFF | Required so we can configure all these parameters for the logs (ADR = Automatic Diagnostic Repository). |
+	
+- Restart the listener using cmd
+  - **lsnrctl stop**
+  - **lsnrctl start**
+
+- To collect logs:
+  - Navigate to the folder.
+  - Logs can be opened using notepad or another text editor.
+
+
+# Walking Through the Failing Scenario
+
+Based on the error message, immediately gave me the clues I needed.
+
+_DataSource.Error: Oracle: ORA-03135: connection lost contact<br>
+<span style="background-color: blue">Process ID: 7900</span><br>
+<span style="background-color: green">Session ID: 396</span> <span style="background-color: teal">Serial number: 44130 </span><br>
+Details:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DataSourceKind=Oracle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DataSourcePath=20.163.1.157:1521/ines.internal.cloudapp.net<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Message=ORA-03135: connection lost contact<br>
+Process ID: 7900<br>
+Session ID: 396 Serial number: 44130<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ErrorCode=-2147467259<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: purple">NativeError=3135</span><br>_
 
 
 
