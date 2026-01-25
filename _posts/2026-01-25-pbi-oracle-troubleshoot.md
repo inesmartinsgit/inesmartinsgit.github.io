@@ -305,9 +305,9 @@ When checking the active Oracle sessions, the technical information in the error
 
 <br>
 From this I knew:
-- The Mashup container PID =  <span style="background-color:#D9FAAA">4960</span>. This allowed me to identify the mashup file directly
-- Was leveraging the driver TID = <span style="background-color:#FADAAA">10144</span>. This allowed me to identify the sqlnet logs from client side directly	
-- Using the port from client side = <span style="background-color:#FAAABF">50679</span>. This helped me narrow down the network traces.
+- The **Mashup container PID =  <span style="background-color:#D9FAAA">4960</span>.** This allowed me to identify the mashup file directly
+- Was leveraging the **Oracle driver TID = <span style="background-color:#FADAAA">10144</span>.** This allowed me to identify the sqlnet logs from client side directly	
+- Using the **port from client side = <span style="background-color:#FAAABF">50679</span>.** This helped me narrow down the network traces.
 
 
 
