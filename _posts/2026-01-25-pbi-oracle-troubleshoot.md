@@ -351,9 +351,9 @@ When checking the active **Oracle process**, I can do the same but correlating o
 From this process information I knew:
 - The **Server PID = <span style="background-color:#829FED">7900</span>.** This allowed me to identify the sqlnet logs from server side directly.
 
-### Oracle Client log analysis
+### Client Log Analysis
 
-#### Power BI Desktop logs
+#### Power BI Desktop Logs
 
 Knowing the mashup container process ID PID = <span style="background-color:#D9FAAA">4960</span> obtained from the session info,  I was able to quickly locate the log file to analyze: _**Microsoft.Mashup.Container.NetFX45.<span style="background-color:#D9FAAA">4960</span>.2026-01-24T15-02-09-350038.log**_
 
@@ -370,7 +370,7 @@ Knowing the mashup container process ID PID = <span style="background-color:#D9F
 
 Before the error occurs, it's visible the connection open request and the query sent to the server.
 
-#### ODP.NET driver logs
+#### ODP.NET Driver Logs
 
 Knowing the Power BI mashup container process ID PID = <span style="background-color:#D9FAAA">4960</span> obtained from the session info, I was able to **convert it to HEX** to find the driver log file: **<span style="background-color:#D9FAAA">4960</span> (DEC) = <span style="background-color:#D1B69D">1360</span> (HEX)** - _**MICROSOFT.MASHUP.CONTAINER.NETFX45.EXE_PID_<span style="background-color:#D1B69D">1360</span>_DATE_2026_01_24_TIME_15_02_14_000333.trc**_
 
@@ -403,3 +403,177 @@ Session ID: 396 Serial number: 44130</span>
 
 Once again, before the error it's visible the connection open request and the query sent to the server with the timestamps and info matching the Power BI mashup logs.
 
+#### SQLNET Client Logs
+
+Knowing it was leveraging the driver TID = 10144 I was able to find the SLQ.NET logs: client_10144.trc
+	
+	(10144) [24-JAN-2026 15:02:14:738] nsmore2recv: exit (0)
+	(10144) [24-JAN-2026 15:09:48:960] nioctl: entry
+	(…)
+	(10144) [24-JAN-2026 15:09:48:961] nsdofls: sending NSPTDA packet
+	(10144) [24-JAN-2026 15:09:48:961] nspsend: entry
+	(10144) [24-JAN-2026 15:09:48:961] nspsend: plen=761, type=6
+	(10144) [24-JAN-2026 15:09:48:961] nttmwr: entry
+	(10144) [24-JAN-2026 15:09:48:962] nttmwr: socket 1712 had bytes written=761
+	(10144) [24-JAN-2026 15:09:48:962] nttmwr: exit
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: packet dump
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 00 02 F9 06 20 00 00  |........|
+	(…)
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 00 00 00 00 00 00 00  |........|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: FE 04 01 00 00 73 65 6C  |.....sel|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 65 63 74 20 22 24 4F 72  |ect."$Or|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 64 65 72 65 64 22 2E 22  |dered"."|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 52 45 47 49 4F 4E 5F 49  |REGION_I|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 44 22 2C 0D 0A 20 20 20  |D",.....|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 20 22 24 4F 72 64 65 72  |."$Order|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 65 64 22 2E 22 52 45 47  |ed"."REG|(…)
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 64 22 2E 22 52 45 47 49  |d"."REGI|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 4F 4E 5F 49 44 22 0D 0A  |ON_ID"..|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 66 65 74 63 68 20 6E 65  |fetch.ne|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 78 74 20 34 30 39 36 20  |xt.4096.|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 72 6F 77 73 20 6F 6E 6C  |rows.onl|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 79 00 00 00 00 01 00 00  |y.......|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 00 00 00 00 00 00 00  |........|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 00 00 00 00 00 00 00  |........|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 00 00 00 00 00 00 00  |........|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 01 00 00 00 00 00 00  |........|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 00 80 00 00 00 00 00  |........|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 00 00 00 00 00 00 00  |........|
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00                       |.       |
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: 761 bytes to transport
+	(10144) [24-JAN-2026 15:09:48:962] nspsend: normal exit
+	(10144) [24-JAN-2026 15:09:48:962] nsdofls: exit (0)
+	(…)
+	(10144) [24-JAN-2026 15:10:07:880] ntt2err: entry
+	(10144) [24-JAN-2026 15:10:07:897] ntt2err: soc 1712 error - operation=5, ntresnt[0]=517, ntresnt[1]=54, ntresnt[2]=0
+	(10144) [24-JAN-2026 15:10:07:897] ntt2err: exit
+	(10144) [24-JAN-2026 15:10:07:897] nttmrd: socket 1712 had bytes read=-1
+	(10144) [24-JAN-2026 15:10:07:897] nttmrd: exit
+	(10144) [24-JAN-2026 15:10:07:897] nsprecv: error exit
+	(10144) [24-JAN-2026 15:10:07:897] nserror: entry
+	(10144) [24-JAN-2026 15:10:07:897] nserror: nsres: id=0, op=68, ns=12547, ns2=12560; nt[0]=517, nt[1]=54, nt[2]=0; ora[0]=0, ora[1]=0, ora[2]=0
+	(10144) [24-JAN-2026 15:10:07:897] nsrdr: error exit
+	(…)
+	(10144) [24-JAN-2026 15:10:07:904] nioqer:  returning err = 3135
+
+There is a time gap between 15:02 and 15:09 (while I was not using the Power BI desktop).
+Then at 15h09 the logs continue and, we see the data packet being sent: from the oracle documentation: NSPTDA is used with data packet types (se references below).
+Since there was no encryption I could see the packet dump and then correlate with the timestamps and error
+The error codes afterwards are also explained in the Oracle documentation (se references below).
+
+	Main TNS error: ns=12547
+		TNS-12547
+		TNS:lost contact - cause: Partner has unexpectedly gone away, usually during process startup.
+	Secondary error: ns2=12560;
+		TNS-12560
+		TNS:protocol adapter error - cause: A generic protocol adapter error occurred.
+	
+	Protocol adapter error: nt[0]=517
+		TNS-00517
+		Lost contact - cause: Partner has unexpectedly gone away.
+		
+	OS (windows) error code:  nt[1]=54
+		An existing connection was forcibly closed by the remote host.
+
+<img width="768" height="211" alt="image" src="https://github.com/user-attachments/assets/62305484-3b72-49ef-a33f-8fb981eb4387" />
+
+### Server Log Analysis
+
+#### SQLNET Server Logs
+
+Knowing the server process ID  PID = 7900  obtained from the process info,  I was able to quickly locate the log file to analyze: server_7900.trc
+
+	[24-JAN-2026 15:02:14:741] nsbasic_bsd: packet dump
+	[24-JAN-2026 15:02:14:741] nsbasic_bsd: 00 00 02 BF 06 00 00 00  |........|
+(…)
+	[24-JAN-2026 15:02:14:742] nsbasic_bsd: 00 00 00 00 DB D9 FF 7F  |........|
+	[24-JAN-2026 15:02:14:742] nsbasic_bsd: 00 00 07 02 41 52 09 41  |....AR.A|
+	[24-JAN-2026 15:02:14:742] nsbasic_bsd: 72 67 65 6E 74 69 6E 61  |rgentina|
+	[24-JAN-2026 15:02:14:742] nsbasic_bsd: 02 C1 03 07 02 42 52 06  |.....BR.|
+	[24-JAN-2026 15:02:14:742] nsbasic_bsd: 42 72 61 7A 69 6C 02 C1  |Brazil..|
+	(…)
+	[24-JAN-2026 15:02:14:742] nsbasic_bsd: 20 66 6F 75 6E 64 0A     |.found. |
+	[24-JAN-2026 15:02:14:742] nsbasic_bsd: exit (0)
+	[24-JAN-2026 15:02:14:742] nsbasic_brc: entry: oln/tot=0,prd=0
+	[24-JAN-2026 15:02:14:742] nttfprd: entry
+
+Last traces show the last packet dump which was successful but the timestamp was before the issue happens, matching the previous set of logs that I could see from the client logs at 15:02.
+
+
+### Client-Server Network Trace (wireshark)
+
+From the client network trace:
+	• We confirm the port from client side is 50679 as seen in the session from Oracle
+	• We can see the packet matching the query we saw from the client side logs.
+	• Then same query trying to be retransmitted.
+	• But then the connection is closed.
+
+<img width="1906" height="1141" alt="image" src="https://github.com/user-attachments/assets/eadf2a67-4c0c-4340-922b-3c6d6d9cc00a" />
+
+From the server network trace:
+	• The same packet cannot be found.
+<img width="1896" height="1133" alt="image" src="https://github.com/user-attachments/assets/3d9bdd92-ce86-4825-8a5a-3d66b6b57de3" />
+
+The previous packet in the same stream can be found on the server side matching the previous query at 15:02 as seen in the Power BI mashup logs and SQL NET logs.
+
+<img width="1923" height="1135" alt="image" src="https://github.com/user-attachments/assets/5667c792-1b83-47a5-8227-4d8d89a2a842" />
+
+Checking on the server network trace using theclient VM ip 20.14.72.115, there is a time gap with no traces between 15:02 and 15:11.
+
+<img width="1911" height="670" alt="image" src="https://github.com/user-attachments/assets/4bc35660-6ff0-4301-81b8-eacfd1ac170f" />
+
+
+To summarize:
+	• Power BI desktop generated correctly the query to get the data and leveraged the oracle driver to send the query to the server.
+	• The packet was sent by client machine but never got to the server machine.
+	• Neither the client nor the server VMs had any idle‑timeout settings or firewall rules that could explain the drop.
+
+Somehow the connection was getting "lost in Azureland" and driving me a bit crazy.
+
+# The Truth Behind the Mystery
+
+After correlating the logs and realizing the packet never reached the server, I went back to the basics and reviewed my setup.
+That’s when I uncovered a critical detail in Azure’s networking documentation: There is a by design limitation on Azure VMs: There is "an adjustable inbound originated flow idle timeout of 4-30 minutes, with a default of 4 minutes, and fixed outbound originated flow idle timeout of 4 minutes."
+ - https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+Unfortunately I couldn't find any logs from Azure showing the connection drop explicitly but was able to confirm this was the root cause by applying the resolution steps described below.
+
+
+# What Actually Solved It
+
+To fix the issue, I narrowed it down to a few workable options:
+
+	• If client machine is not an azure VM, I can increase the inbound idle timeout up to 30m (inbound is configurable for the server VM).
+	• If I want to keep using the Azure VM as the client:
+		○ Switch to using the private IP, avoiding the outbound idle timeout entirely, or
+		○ Configure a keep‑alive mechanism so the connection never becomes idle long enough to be dropped.
+
+On the server side, enabling a keep‑alive was simple. 
+I added the following parameter to the sqlnet config file, setting the interval to the number of minutes I wanted (in this case, 1 minute):
+SQLNET.EXPIRE_TIME=1
+
+I tested each of these options independently, and all of them successfully resolved the error, confirming that the root cause was the Azure VM public IP idle‑timeout limitation.
+
+
+# Wrapping Up the Mystery
+In the end, what looked like an Oracle‑side issue turned out to be a much simpler but easily overlooked network behavior dictated by Azure’s default idle timeout. 
+By walking through logs at each layer (Power BI desktop (client application), ODP.NET unmanaged Oracle driver, SQLNet logs on server and client and network traces), the root cause revealed itself clearly: the query never reached the server because the connection was silently dropped mid‑path.
+Understanding the full chain of dependencies was what ultimately gave me clarity. 
+
+I hope this breakdown helps you accelerate your own investigations the next time a connection mysteriously “vanishes.” 
+If you’ve encountered similar challenges or found alternative approaches, I’d love to learn from your experience too!
+
+---
+
+References:
+- Seamless Power BI and Oracle Integration: Key Learnings & Setup Tips https://inesmartinsgit.github.io/2026/01/14/pbi-oracle-seamless.html 
+- Power Query Oracle database connector - https://learn.microsoft.com/en-us/power-query/connectors/oracle-database 
+- https://learn.microsoft.com/en-us/power-bi/fundamentals/desktop-diagnostics
+-  https://docs.oracle.com/en/error-help/db/ora-03135/
+- https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/introducing-oracle-net-services.html
+-  https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/understanding-oracle-net-architecture.html
+- https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/parameters-for-the-sqlnet.ora.html
+-  https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/oracle-net-listener-parameters-in-listener-ora.html
+-  https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/parameters-for-the-sqlnet.ora.htm
+- https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/background-processes.html
+- Evaluating Oracle Net Services Trace Files - https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/troubleshooting-oracle-net-services.html.
+- TNS Database Error Messages - https://docs.oracle.com/en/error-help/db/tns-index.html
