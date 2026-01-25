@@ -358,14 +358,45 @@ From this process information I knew:
 
 Knowing the mashup container process ID PID = <span style="background-color:#D9FAAA">4960</span> obtained from the session info,  I was able to quickly locate the log file to analyze: _**Microsoft.Mashup.Container.NetFX45.<span style="background-color:#D9FAAA">4960</span>.2026-01-24T15-02-09-350038.log**_
 
-<br>
-
 <div style="font-style: italic; white-space: pre-wrap; word-wrap: break-word; max-width: 100%;">
 
 {"Start":<span style="background:#DEDEDE;">"2026-01-24T15:09:48.9553912Z"</span>,"Action":<strong>"Engine/IO/Db/Oracle/Connection/Open"</strong>strong>,"ResourceKind":"Oracle","ResourcePath":"20.163.1.157:1521/ines.internal.cloudapp.net","HostProcessId":"956","PartitionKey":"Section1/LOCATIONS/2","Server":"20.163.1.157:1521/ines.internal.cloudapp.net","RequireEncryption":"False","ConnectionTimeout":"15","ConnectionId":"957c17d0-db30-4833-a3ab-70b9c1e43935","ProductVersion":"2.149.1054.0 (25.11)+fe0a1c0f2fc6e9cf0939a7efabedc7cdb3358bad","ActivityId":"86d59d77-7be2-43f3-afc3-8dfab4ef4b1b","Process":"Microsoft.Mashup.Container.NetFX45","Pid":4960,"Tid":1,"Duration":"00:00:00.0004251"}
 
-{"Start":"2026-01-24T15:09:48.9558422Z","Action":"<strong>Engine/IO/Db/Oracle/Command/ExecuteDbDataReader"</strong>,"ResourceKind":"Oracle","ResourcePath":"20.163.1.157:1521/ines.internal.cloudapp.net","HostProcessId":"956","PartitionKey":"Section1/LOCATIONS/2","Server":"20.163.1.157:1521/ines.internal.cloudapp.net","CommandText":<span style="background-color:#F6FAAA">"select \"$Ordered\".\"REGION_ID\",\r\n    \"$Ordered\".\"REGION_NAME\"\r\nfrom \r\n(\r\n    select \"_\".\"REGION_ID\",\r\n        \"_\".\"REGION_NAME\"\r\n    from \"HR\".\"REGIONS\" \"_\"\r\n    where \"_\".\"REGION_ID\" = 3\r\n) \"$Ordered\"\r\norder by \"$Ordered\".\"REGION_ID\"\r\nfetch next 4096 rows only"</span>,"CommandTimeout":"600","ConnectionId":"957c17d0-db30-4833-a3ab-70b9c1e43935","Behavior":"Default","Exception":"Exception:\r\nExceptionType: Oracle.DataAccess.Client.OracleException, Oracle.DataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342\r\n<span style="background-color:#F77059">Message: ORA-03135: connection lost contact\nProcess ID: 7900\nSession ID: 396 Serial number: 44130</span>\r\nStackTrace:\n   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, String procedure, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, Boolean bCheck, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleCommand.ExecuteReader(Boolean requery, Boolean fillRequest, CommandBehavior behavior)\r\n   at Oracle.DataAccess.Client.OracleCommand.ExecuteDbDataReader(CommandBehavior behavior)\r\n   at Microsoft.Mashup.Engine1.Library.Common.TracingDbCommand.<>n__0(CommandBehavior behavior)\r\n   at Microsoft.Mashup.Engine1.Library.Common.TracingDbCommand.<>c__DisplayClass6_0.<ExecuteDbDataReader>b__0(IHostTrace trace)\r\n   at Microsoft.Mashup.Engine1.Library.Common.Tracer.TraceCommon[T](IHostTrace trace, Func`2 func)\r\n\r\n\r\n","ProductVersion":"2.149.1054.0 (25.11)+fe0a1c0f2fc6e9cf0939a7efabedc7cdb3358bad","ActivityId":"86d59d77-7be2-43f3-afc3-8dfab4ef4b1b","Process":"Microsoft.Mashup.Container.NetFX45","Pid":4960,"Tid":1,"Duration":"00:00:19.4224248"}
+{"Start":<span style="background:#DEDEDE;">"2026-01-24T15:09:48.9558422Z"</span>,"Action":"<strong>Engine/IO/Db/Oracle/Command/ExecuteDbDataReader"</strong>,"ResourceKind":"Oracle","ResourcePath":"20.163.1.157:1521/ines.internal.cloudapp.net","HostProcessId":"956","PartitionKey":"Section1/LOCATIONS/2","Server":"20.163.1.157:1521/ines.internal.cloudapp.net","CommandText":<span style="background-color:#F6FAAA">"select \"$Ordered\".\"REGION_ID\",\r\n    \"$Ordered\".\"REGION_NAME\"\r\nfrom \r\n(\r\n    select \"_\".\"REGION_ID\",\r\n        \"_\".\"REGION_NAME\"\r\n    from \"HR\".\"REGIONS\" \"_\"\r\n    where \"_\".\"REGION_ID\" = 3\r\n) \"$Ordered\"\r\norder by \"$Ordered\".\"REGION_ID\"\r\nfetch next 4096 rows only"</span>,"CommandTimeout":"600","ConnectionId":"957c17d0-db30-4833-a3ab-70b9c1e43935","Behavior":"Default","Exception":"Exception:\r\nExceptionType: Oracle.DataAccess.Client.OracleException, Oracle.DataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342\r\n<span style="background-color:#F77059">Message: ORA-03135: connection lost contact\nProcess ID: 7900\nSession ID: 396 Serial number: 44130</span>\r\nStackTrace:\n   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(Int32 errCode, OracleConnection conn, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, String procedure, Boolean bCheck, Int32 isRecoverable, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleException.HandleError(Int32 errCode, OracleConnection conn, String procedure, IntPtr opsErrCtx, OpoSqlValCtx* pOpoSqlValCtx, Object src, Boolean bCheck, OracleLogicalTransaction m_OracleLogicalTransaction)\r\n   at Oracle.DataAccess.Client.OracleCommand.ExecuteReader(Boolean requery, Boolean fillRequest, CommandBehavior behavior)\r\n   at Oracle.DataAccess.Client.OracleCommand.ExecuteDbDataReader(CommandBehavior behavior)\r\n   at Microsoft.Mashup.Engine1.Library.Common.TracingDbCommand.<>n__0(CommandBehavior behavior)\r\n   at Microsoft.Mashup.Engine1.Library.Common.TracingDbCommand.<>c__DisplayClass6_0.<ExecuteDbDataReader>b__0(IHostTrace trace)\r\n   at Microsoft.Mashup.Engine1.Library.Common.Tracer.TraceCommon[T](IHostTrace trace, Func`2 func)\r\n\r\n\r\n","ProductVersion":"2.149.1054.0 (25.11)+fe0a1c0f2fc6e9cf0939a7efabedc7cdb3358bad","ActivityId":"86d59d77-7be2-43f3-afc3-8dfab4ef4b1b","Process":"Microsoft.Mashup.Container.NetFX45","Pid":4960,"Tid":1,"Duration":"00:00:19.4224248"}
 	
-{"Start":"2026-01-24T15:10:08.3951188Z","Action":<strong>"Engine/IO/Db/Oracle/Connection/Close"</strong>,"ResourceKind":"Oracle","ResourcePath":"20.163.1.157:1521/ines.internal.cloudapp.net","HostProcessId":"956","PartitionKey":"Section1/LOCATIONS/2","Server":"20.163.1.157:1521/ines.internal.cloudapp.net","ConnectionId":"957c17d0-db30-4833-a3ab-70b9c1e43935","ProductVersion":"2.149.1054.0 (25.11)+fe0a1c0f2fc6e9cf0939a7efabedc7cdb3358bad","ActivityId":"86d59d77-7be2-43f3-afc3-8dfab4ef4b1b","Process":"Microsoft.Mashup.Container.NetFX45","Pid":4960,"Tid":1,"Duration":"00:00:00.0099732"}
+{"Start":<span style="background:#DEDEDE;">"2026-01-24T15:10:08.3951188Z"</span>,"Action":<strong>"Engine/IO/Db/Oracle/Connection/Close"</strong>,"ResourceKind":"Oracle","ResourcePath":"20.163.1.157:1521/ines.internal.cloudapp.net","HostProcessId":"956","PartitionKey":"Section1/LOCATIONS/2","Server":"20.163.1.157:1521/ines.internal.cloudapp.net","ConnectionId":"957c17d0-db30-4833-a3ab-70b9c1e43935","ProductVersion":"2.149.1054.0 (25.11)+fe0a1c0f2fc6e9cf0939a7efabedc7cdb3358bad","ActivityId":"86d59d77-7be2-43f3-afc3-8dfab4ef4b1b","Process":"Microsoft.Mashup.Container.NetFX45","Pid":4960,"Tid":1,"Duration":"00:00:00.0099732"}
 
 </div>
+
+Before the error occurs, it's visible the connection open request and the query sent to the server.
+
+#### ODP.NET driver logs
+
+Knowing the Power BI mashup container process ID PID = <span style="background-color:#D9FAAA">4960</span> obtained from the session info, I was able to** convert it to HEX** to find the driver log file: **<span style="background-color:#D9FAAA">4960</span> (DEC) = <span style="background-color:#D1B69D">1360</span> (HEX)** - _**MICROSOFT.MASHUP.CONTAINER.NETFX45.EXE_PID_<span style="background-color:#D1B69D">1360</span>_DATE_2026_01_24_TIME_15_02_14_000333.trc**_
+
+<div style="font-style: italic; white-space: pre-wrap; word-wrap: break-word; max-width: 100%;">
+	
+TIME:<span style="background:#DEDEDE;">2026/01/24-15:09:48:961</span> TID:27a0  OracleConnection::Open() => Calling RequestBegin
+(…)
+TIME:2026/01/24-15:09:48:961 TID:27a0  (INFO) (OracleConnectionOCP.Open) Pool Id=531559270 PooledConCtx=40026340 sessid=396 serial=44130 inst=ines ConCtx=(2405dcbd1a0)
+(…)
+TIME:<span style="background:#DEDEDE;">2026/01/24-15:09:48:961</span> TID:27a0  SqlInit(): SQL: <span style="background-color:#F6FAAA">select "$Ordered"."REGION_ID",
+    "$Ordered"."REGION_NAME"
+from 
+(
+    select "_"."REGION_ID",
+        "_"."REGION_NAME"
+    from "HR"."REGIONS" "_"
+    where "_"."REGION_ID" = 3
+) "$Ordered"
+order by "$Ordered"."REGION_ID"
+fetch next 4096 rows only</span>
+(…)
+TIME:2026/01/24-15:10:08:007 TID:27a0  (EXIT)  OpsSqlExecuteReader(): RetCode=-1 Line=783
+TIME:2026/01/24-15:10:08:013 TID:27a0  (ENTRY) OpsErrGetOpoCtx()
+TIME:<span style="background:#DEDEDE;">2026/01/24-15:10:08:014</span> TID:27a0  <span style="background:#F77059;">(ERROR) Oracle error code=3135; Oracle msg=ORA-03135: connection lost contact
+Process ID: 7900
+Session ID: 396 Serial number: 44130</span>
+
+</div>
+
