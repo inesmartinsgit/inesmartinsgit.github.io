@@ -460,24 +460,22 @@ Knowing it was leveraging the driver TID = 10144 I was able to find the SLQ.NET 
 	
 </div>
 
-There is a time gap between 15:02 and 15:09 (while I was not using the Power BI desktop).
-Then at 15h09 the logs continue and, we see the data packet being sent: from the oracle documentation: NSPTDA is used with data packet types (se references below).
-Since there was no encryption I could see the packet dump and then correlate with the timestamps and error
-The error codes afterwards are also explained in the Oracle documentation (se references below).
+There is a time gap between 15:02 and 15:09 (while I was not using the Power BI desktop). <br>
+Then at 15h09 the logs continue and, we see the data packet being sent: from the oracle documentation, NSPTDA is used with data packet types (se references below). <br>
+Since there was no encryption I could see the packet dump and then correlate with the timestamps and error. <br>
+The error codes are also explained in the Oracle documentation (see references below). <br>
 
-	Main TNS error: ns=12547
-		TNS-12547
-		TNS:lost contact - cause: Partner has unexpectedly gone away, usually during process startup.
-	Secondary error: ns2=12560;
-		TNS-12560
-		TNS:protocol adapter error - cause: A generic protocol adapter error occurred.
-	
-	Protocol adapter error: nt[0]=517
-		TNS-00517
-		Lost contact - cause: Partner has unexpectedly gone away.
-		
-	OS (windows) error code:  nt[1]=54
-		An existing connection was forcibly closed by the remote host.
+- Error Stack Component: NS - Network Session (main and secondary layers)
+  - Main TNS error: ns=12547
+	- TNS-12547: TNS:lost contact - cause: Partner has unexpectedly gone away, usually during process startup.
+  - Secondary error: ns2=12560;
+	- TNS-12560: TNS:protocol adapter error - cause: A generic protocol adapter error occurred.
+
+- Error Stack Component: NT - Network Transport (main, secondary, and operating system layers)
+  - Protocol adapter error: nt[0]=517
+	- TNS-00517: Lost contact - cause: Partner has unexpectedly gone away.
+  - OS (windows) error code:  nt[1]=54
+	- An existing connection was forcibly closed by the remote host.
 
 <img width="768" height="211" alt="image" src="https://github.com/user-attachments/assets/62305484-3b72-49ef-a33f-8fb981eb4387" />
 
@@ -502,6 +500,7 @@ Knowing the server process ID  PID = 7900  obtained from the process info,  I wa
 	[24-JAN-2026 15:02:14:742] nsbasic_brc: entry: oln/tot=0,prd=0
 	[24-JAN-2026 15:02:14:742] nttfprd: entry
 </div>
+
 Last traces show the last packet dump which was successful but the timestamp was before the issue happens, matching the previous set of logs that I could see from the client logs at 15:02.
 
 
