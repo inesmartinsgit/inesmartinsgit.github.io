@@ -246,7 +246,7 @@ Session ID: 396 Serial number: 44130<br>
 
 When checking the active Oracle sessions, the technical information in the error correlates directly with the information I needed to proceed further on checking the client side logs.
 
-<div style="overflow-x:auto;">
+<div style="overflow-x:auto; display:block;">
 	
 | SADDR | SID | SERIAL# | AUDSID | PADDR | USER# | USERNAME | COMMAND | OWNERID | TADDR | LOCKWAIT | STATUS | SERVER | SCHEMA# | SCHEMANAME | OSUSER | PROCESS | MACHINE | PORT | TERMINAL | PROGRAM | TYPE |
 |-------|-----|---------|--------|--------|--------|-----------|----------|----------|--------|-----------|---------|---------|-----------|-------------|---------|----------|----------|--------|-----------|-----------|------|
