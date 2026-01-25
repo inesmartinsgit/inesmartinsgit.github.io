@@ -249,7 +249,7 @@ When checking the active Oracle sessions, the technical information in the error
 <div style="overflow-x:auto;">
 | SADDR | SID | SERIAL# | AUDSID | PADDR | USER# | USERNAME | COMMAND | OWNERID | TADDR | LOCKWAIT | STATUS | SERVER | SCHEMA# | SCHEMANAME | OSUSER | PROCESS | MACHINE | PORT | TERMINAL | PROGRAM | TYPE |
 |-------|-----|---------|--------|--------|--------|-----------|----------|----------|--------|-----------|---------|---------|-----------|-------------|---------|----------|----------|--------|-----------|-----------|------|
-| 00007FF82FAEB420 | <span style="background-color:#AAFABE">396</span> | 44130 | 40031 | 00007FF82F573A20 | 107 | HR | 0 | 2147483644 |  |  | INACTIVE | DEDICATED | 107 | HR | inmartin | <span style="background-color:#D9FAAA">4960</span>:<span style="background-color:#FADAAA">10144</span> | WORKGROUP\VMoracleclient | <span style="background-color:#D9FAAA">4960</span>:<span style="background-color:#FAAABF">50679</span> | VMoracleclient | **Microsoft.Mashup.Container.NetFX45.exe** | USER
+| 00007FF82FAEB420 | <span style="background-color:#AAFABE">396</span> | 44130 | 40031 | 00007FF82F573A20 | 107 | HR | 0 | 2147483644 |  |  | INACTIVE | DEDICATED | 107 | HR | inmartin | <span style="background-color:#D9FAAA">4960</span>:<span style="background-color:#FADAAA">10144</span> | WORKGROUP\VMoracleclient | <span style="background-color:#FAAABF">50679</span> | VMoracleclient | **Microsoft.Mashup.Container.NetFX45.exe** | USER
 </div>
 
 
