@@ -233,8 +233,8 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 Based on the error message, immediately gave me the clues I needed.
 
 _DataSource.Error: Oracle: ORA-03135: connection lost contact<br>
-<span style="background-color: blue">Process ID: 7900</span><br>
-<span style="background-color: green">Session ID: 396</span> <span style="background-color: 309181">Serial number: 44130 </span><br>
+<span style="background-color: 829FED">Process ID: 7900</span><br>
+<span style="background-color: AAFABE">Session ID: 396</span> <span style="background-color: 42D4BC">Serial number: 44130 </span><br>
 Details:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;DataSourceKind=Oracle<br>
 &nbsp;&nbsp;&nbsp;&nbsp;DataSourcePath=20.163.1.157:1521/ines.internal.cloudapp.net<br>
@@ -242,7 +242,7 @@ Details:<br>
 Process ID: 7900<br>
 Session ID: 396 Serial number: 44130<br>
 &nbsp;&nbsp;&nbsp;&nbsp;ErrorCode=-2147467259<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: purple">NativeError=3135</span><br>_
+&nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color: EBAAFA">NativeError=3135</span><br>_
 
 
 
