@@ -167,6 +167,15 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 - Edit the sqlnet.ora file and add the following:
 
 
+| Trace Config | Description |
+|----------|----------|
+| TRACE_LEVEL_CLIENT = 16 | Support level logs (maximum info)  |
+| TRACE_FILE_CLIENT = client | Name of the log file. <br> It includes the process identifier (PID) appended to the name automatically. |
+| TRACE_DIRECTORY_CLIENT = C:\Users\inmartin\Oracle\network\admin\sqlnetlogs | Folder where the traces are located. <br> Be careful with possible disk space issues and if possible select a non C:\ drive |
+| TRACE_TIMESTAMP_CLIENT = ON | To add a timestamp to the logs inside the file |
+| DIAG_ADR_ENABLED=OFF | Required so we can configure all these parameters for the logs |
+| TRACE_UNIQUE_CLIENT=ON | Unique trace file is created for each client trace session |
+	
 
 
 
