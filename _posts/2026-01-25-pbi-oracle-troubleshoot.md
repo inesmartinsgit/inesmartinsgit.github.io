@@ -408,6 +408,7 @@ Once again, before the error it's visible the connection open request and the qu
 Knowing it was leveraging the driver TID = 10144 I was able to find the SLQ.NET logs: client_10144.trc
 
 <div style="white-space: pre-wrap; font-style: italic; font-size:12px; word-wrap: break-word; max-width: 100%;">
+	
 	(10144) [24-JAN-2026 15:02:14:738] nsmore2recv: exit (0)
 	(10144) [24-JAN-2026 15:09:48:960] nioctl: entry
 	(…)
@@ -456,6 +457,7 @@ Knowing it was leveraging the driver TID = 10144 I was able to find the SLQ.NET 
 	(10144) [24-JAN-2026 15:10:07:897] nsrdr: error exit
 	(…)
 	(10144) [24-JAN-2026 15:10:07:904] nioqer:  returning err = 3135
+	
 </div>
 
 There is a time gap between 15:02 and 15:09 (while I was not using the Power BI desktop).
@@ -569,15 +571,15 @@ If you’ve encountered similar challenges or found alternative approaches, I’
 ---
 
 References:
-- Seamless Power BI and Oracle Integration: Key Learnings & Setup Tips https://inesmartinsgit.github.io/2026/01/14/pbi-oracle-seamless.html 
-- Power Query Oracle database connector - https://learn.microsoft.com/en-us/power-query/connectors/oracle-database 
+- [Seamless Power BI and Oracle Integration: Key Learnings & Setup Tips](https://inesmartinsgit.github.io/2026/01/14/pbi-oracle-seamless.html)
+- [Power Query Oracle database connector](https://learn.microsoft.com/en-us/power-query/connectors/oracle-database)
 - https://learn.microsoft.com/en-us/power-bi/fundamentals/desktop-diagnostics
--  https://docs.oracle.com/en/error-help/db/ora-03135/
+- https://docs.oracle.com/en/error-help/db/ora-03135/
 - https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/introducing-oracle-net-services.html
--  https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/understanding-oracle-net-architecture.html
+- https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/understanding-oracle-net-architecture.html
 - https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/parameters-for-the-sqlnet.ora.html
--  https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/oracle-net-listener-parameters-in-listener-ora.html
--  https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/parameters-for-the-sqlnet.ora.htm
+- https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/oracle-net-listener-parameters-in-listener-ora.html
+- https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/parameters-for-the-sqlnet.ora.htm
 - https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/background-processes.html
-- Evaluating Oracle Net Services Trace Files - https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/troubleshooting-oracle-net-services.html.
-- TNS Database Error Messages - https://docs.oracle.com/en/error-help/db/tns-index.html
+- [Evaluating Oracle Net Services Trace Files](https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/troubleshooting-oracle-net-services.html)
+- [TNS Database Error Messages](https://docs.oracle.com/en/error-help/db/tns-index.html)
