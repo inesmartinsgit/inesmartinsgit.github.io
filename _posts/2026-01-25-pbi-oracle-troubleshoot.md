@@ -192,7 +192,7 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 	
 - For this scenario there are no errors related to listener but I'll include them in the configuration in case you will find it useful.
 
-##### SQL NET logs for Oracle server
+**SQL NET logs for Oracle server**
 	
 - Edit the sqlnet.ora file and add the following:
 
@@ -207,7 +207,7 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 - Navigate to the folder.
 - Logs can be opened using notepad or another text editor.
 
-##### SQL NET logs for Oracle listener
+**SQL NET logs for Oracle listener**
 	
 - Edit the listener.ora file and add the following:
 
@@ -230,7 +230,7 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 
 # Walking Through the Failing Scenario
 
-Based on the error message, immediately gave me the clues I needed.
+The error message provided me useful information to directly correlate with the logs.
 
 _DataSource.Error: Oracle: ORA-03135: connection lost contact<br>
 <span style="background-color:#829FED">Process ID: 7900</span><br>
