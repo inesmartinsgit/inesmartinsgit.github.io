@@ -122,5 +122,5 @@ Guess what?
 
 💡 **PowerShell had the same problem therefore the issue was not specific to the application (PowerShell/Power BI).**
 
-<img width="1209" height="350" alt="image" src="https://github.com/user-attachments/assets/f4194716-62d5-42bc-9d23-894aefa9d81d" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/f4194716-62d5-42bc-9d23-894aefa9d81d" />
 
