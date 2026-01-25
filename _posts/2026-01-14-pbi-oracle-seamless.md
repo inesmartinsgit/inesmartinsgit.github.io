@@ -72,7 +72,7 @@ I strongly recommend **having only one** ODP.NET unmanaged driver version instal
 After you completed the installation on the client machine, you can leverage **PowerShell to confirm the driver is correctly installed.**
 
 To do this, run the following command: 
-```
+```powershell
 [System.Data.Common.DbProviderFactories]::GetFactoryClasses()|?{$_.InvariantName -eq "Oracle.DataAccess.Client"}
 ```
 
@@ -104,7 +104,7 @@ This script uses **EZCONNECT** (this is called **easy connect naming** and, in e
 ⚠️**Warning**: The script is using hard-coded username/password which is not advised for production environments. For those scenarios, I recommend using secure methods to store the credentials.
 
 
-```
+```powershell
 #Create the connection string
 $conn = [System.Data.Common.DbProviderFactories]::GetFactory("Oracle.DataAccess.Client").CreateConnection()
 $conn.ConnectionString = "Data Source=20.163.1.157:1521/ines.internal.cloudapp.net;User Id=HR;Password=xxxx“ #---> CHANGE TO YOUR CONNECTION STRING
@@ -120,7 +120,7 @@ $sel_stmt = $conn.CreateCommand()
 $sel_stmt.CommandText = "SELECT * FROM HR.JOBS WHERE MIN_SALARY > 10000" # ---> CHANGE QUERY
 $rdr = $sel_stmt.ExecuteReader()
 while ($rdr.Read()) {
-   write-host "$($rdr.GetOracleValue(0).Value)" ---> ADAPT TO THE RESULT OF YOUR QUERY
+   write-host "$($rdr.GetOracleValue(0).Value)" #---> ADAPT TO THE RESULT OF YOUR QUERY
 }
 
 #Close the connection
@@ -145,7 +145,7 @@ For more information on this, consult Oracle's documentation such as [Local Nami
 
 And finally, I connected by using the same PowerShell sample with the **alias** defined by me in the TNSNAMES.ORA file (*inesalias*) instead of EZCONNECT.
 
-```
+```powershell
 #Create the connection string
 $conn = [System.Data.Common.DbProviderFactories]::GetFactory("Oracle.DataAccess.Client").CreateConnection()
 $conn.ConnectionString = "Data Source=inesalias;User Id=HR;Password=xxxx“ #---> CHANGE TO YOUR CONNECTION STRING
@@ -161,7 +161,7 @@ $sel_stmt = $conn.CreateCommand()
 $sel_stmt.CommandText = "SELECT * FROM HR.JOBS WHERE MIN_SALARY > 10000" # ---> CHANGE TO YOUR QUERY
 $rdr = $sel_stmt.ExecuteReader()
 while ($rdr.Read()) {
-   write-host "$($rdr.GetOracleValue(0).Value)" ---> ADAPT TO THE RESULT OF YOUR QUERY
+   write-host "$($rdr.GetOracleValue(0).Value)" #---> ADAPT TO THE RESULT OF YOUR QUERY
 }
  
 #Close the connection
@@ -182,8 +182,8 @@ Your feedback and topic suggestions are always welcome.
 
 <br>
 <br>
----
 
+---
 References:
 
 - Microsoft's official documentation on the Oracle connector:
