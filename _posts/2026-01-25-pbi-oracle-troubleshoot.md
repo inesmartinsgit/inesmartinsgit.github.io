@@ -564,7 +564,7 @@ Knowing it was leveraging the driver TID = <span style="background-color:#FADAAA
 Then at 15h09 the logs continue and the data packet being sent is visible: from the [Oracle's documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/troubleshooting-oracle-net-services.html), **NSPTDA** is used with **data packet types**. <br>
 Since there was no encryption I could see the packet dump and then correlate with the timestamps and error. <br>
 
-Then, based on the **ntt2err** and **nserror** error codes, I was able to extract additional information:
+📖 Then, based on the **ntt2err** and **nserror** error codes, I was able to extract additional information:
 - **Error Stack Component: NS - Network Session (main and secondary layers)**
   - Main TNS error: ns=**12547**
 	- [TNS-12547](https://docs.oracle.com/en/error-help/db/tns-12547/?r=19c): TNS:lost contact - cause: Partner has unexpectedly gone away, usually during process startup.
@@ -610,15 +610,15 @@ Knowing the server process ID  PID = <span style="background-color:#829FED">7900
 
 ### Client-Server Network Trace (wireshark)
 
-From the client network trace:
-- I confirmed the port from client side is 50679 as seen in the session from Oracle
-- I could see the packet matching the query that I saw from the client side logs.
-- Then same query trying to be retransmitted.
-- But then the connection is closed.
+From the **client network trace**:
+- I confirmed the **port** from client side is <span style="background-color:#FAAABF">50679</span> aligning with the Oracle session details.
+- I could see the **packet** matching the query that I saw from the client side logs.
+- But then, the same query was trying to be **retransmitted**.
+- Ultimately, the **connection was closed.**
 
 <img width="1200" alt="image" src="https://github.com/user-attachments/assets/eadf2a67-4c0c-4340-922b-3c6d6d9cc00a" />
 
-From the server network trace, the same packet cannot be found.
+From the **server network trace**, the **same packet could not be found**.
 
 <img width="1200" alt="image" src="https://github.com/user-attachments/assets/3d9bdd92-ce86-4825-8a5a-3d66b6b57de3" />
 
@@ -626,63 +626,71 @@ The previous packet in the same stream can be found on the server side matching 
 
 <img width="1200" alt="image" src="https://github.com/user-attachments/assets/5667c792-1b83-47a5-8227-4d8d89a2a842" />
 
-Checking on the server network trace using theclient VM ip 20.14.72.115, there is a time gap with no traces between 15:02 and 15:11.
+Checking on the server network trace using the client VM IP 20.14.72.115, there is a time gap with **no traces between 15:02 and 15:11.**
 
 <img width="1200" alt="image" src="https://github.com/user-attachments/assets/4bc35660-6ff0-4301-81b8-eacfd1ac170f" />
 
+<br>
+💡 To summarize:
+- Power BI Desktop correctly generated the **query** and used the Oracle driver to send it to the server.
+- The client machine did send the packet, but it **never reached the server**.
+- Neither the client nor the server VMs had **idle‑timeout settings** or **firewall** rules that could account for the drop.
 
-To summarize:
-- Power BI desktop generated correctly the query to get the data and leveraged the oracle driver to send the query to the server.
-- The packet was sent by client machine but never got to the server machine.
-- Neither the client nor the server VMs had any idle‑timeout settings or firewall rules that could explain the drop.
+<br>
 
-Somehow the connection was getting "lost in Azureland" and driving me a bit crazy.
+❓ Somehow the **connection was getting "lost in Azureland"** and driving me a bit crazy.
+
+<br> 
 
 # The Truth Behind the Mystery
 
 After correlating the logs and realizing the packet never reached the server, I went back to the basics and reviewed my setup.
 
 That’s when I uncovered a critical detail in [Azure’s networking documentation](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses).<br> 
-There is a by design limitation on Azure VMs: "an adjustable inbound originated flow idle timeout of 4-30 minutes, with a default of 4 minutes, and fixed outbound originated flow idle timeout of 4 minutes".<br>
+💡 There is a by design **limitation on Azure VMs**: "an adjustable **inbound originated flow idle timeout of 4-30 minutes**, with a **default of 4 minutes**, and **fixed outbound originated flow idle timeout of 4 minutes**".<br>
 Unfortunately I couldn't find any logs from Azure showing the connection drop explicitly but was able to confirm this was the root cause by applying the resolution steps described below.
 
+<br>
 
 # What Actually Solved It
 
-To fix the issue, I narrowed it down to a few workable options:
-- If client machine is not an azure VM, I can increase the inbound idle timeout up to 30m (inbound is configurable for the server VM).
-- If I want to keep using the Azure VM as the client:
-  - Switch to using the private IP, avoiding the outbound idle timeout entirely, or
-  - Configure a keep‑alive mechanism so the connection never becomes idle long enough to be dropped.
+🔧 To **fix the issue**, I narrowed it down to a few workable options:
+- **Option 1:** If client machine is not an azure VM, I can **increase the inbound idle timeout up to 30m** (inbound is configurable for the server VM).
+- **Option 2:** If I want to keep using the Azure VM as the client:
+  - **2A:** Switch to using the **private IP**, avoiding the outbound idle timeout entirely, or
+  - **2B:** Configure a **keep‑alive mechanism** so the connection never becomes idle long enough to be dropped.
 
-On the server side, enabling a keep‑alive was simple. <br>
-I added the following parameter to the sqlnet config file, setting the interval to the number of minutes I wanted (in this case, 1 minute): **SQLNET.EXPIRE_TIME=1**
+📌 For Option 2B, enabling a keep‑alive was simple on the server side. <br>
+I added the following parameter to the sqlnet config file, setting the interval to the number of minutes I wanted (in this case, 1 minute): _SQLNET.EXPIRE_TIME=1_
 
-I tested each of these options independently, and all of them successfully resolved the error, confirming that the root cause was the Azure VM public IP idle‑timeout limitation.
+✅ I tested each of these options independently, and **all of them successfully resolved the error**, confirming that the root cause was the Azure VM public IP idle‑timeout limitation.
 
+<br>
 
 # Wrapping Up the Mystery
 
-In the end, what looked like an Oracle‑side issue turned out to be a much simpler but easily overlooked network behavior dictated by Azure’s default idle timeout. 
+🚀 In the end, what looked like an Oracle‑side issue turned out to be a much simpler but easily overlooked network behavior dictated by Azure VM Public IP’s default idle timeout. 
 
-By walking through logs at each layer (Power BI desktop (client application), ODP.NET unmanaged Oracle driver, SQLNet logs on server and client and network traces), the root cause revealed itself clearly: the query never reached the server because the connection was silently dropped mid‑path. <br>
+By walking through logs at each layer (Power BI desktop, ODP.NET unmanaged Oracle driver, SQLNet logs on server and client and network traces), the root cause revealed itself clearly: the query never reached the server because the connection was silently dropped mid‑path. <br>
 Understanding the full chain of dependencies was what ultimately gave me clarity. 
 
 I hope this breakdown helps you accelerate your own investigations the next time a connection mysteriously “vanishes.”  <br>
 If you’ve encountered similar challenges or found alternative approaches, I’d love to learn from your experience too!
+
+<br>
+<br>
 
 ---
 
 References:
 - [Seamless Power BI and Oracle Integration: Key Learnings & Setup Tips](https://inesmartinsgit.github.io/2026/01/14/pbi-oracle-seamless.html)
 - [Power Query Oracle database connector](https://learn.microsoft.com/en-us/power-query/connectors/oracle-database)
-- https://learn.microsoft.com/en-us/power-bi/fundamentals/desktop-diagnostics
-- https://docs.oracle.com/en/error-help/db/ora-03135/
-- https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/introducing-oracle-net-services.html
-- https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/understanding-oracle-net-architecture.html
-- https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/parameters-for-the-sqlnet.ora.html
-- https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/oracle-net-listener-parameters-in-listener-ora.html
-- https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/parameters-for-the-sqlnet.ora.htm
-- https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/background-processes.html
+- [Power BI Desktop diagnostics collection](https://learn.microsoft.com/en-us/power-bi/fundamentals/desktop-diagnostics)
+- [Database Error Messages](https://docs.oracle.com/en/error-help/db/)
+- [Introducing Oracle Net Services](https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/introducing-oracle-net-services.html)
+- [Understanding Oracle Net Architecture](https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/understanding-oracle-net-architecture.html)
+- [Parameters for the sqlnet.ora File](https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/parameters-for-the-sqlnet.ora.html)
+- [Oracle Net Listener Parameters in the listener.ora File](https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/oracle-net-listener-parameters-in-listener-ora.html)
+- [Oracle Database Background Process](https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/background-processes.html)
 - [Evaluating Oracle Net Services Trace Files](https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/troubleshooting-oracle-net-services.html)
 - [TNS Database Error Messages](https://docs.oracle.com/en/error-help/db/tns-index.html)
