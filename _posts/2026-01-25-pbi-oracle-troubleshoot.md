@@ -207,15 +207,6 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 </table>
 </div>
 
-| Trace Config to Add | Description |
-|----------|----------|
-| TRACE_LEVEL_CLIENT = 16 | Support level logs (maximum info). |
-| TRACE_FILE_CLIENT = client | Name of the log file. <br> It includes the process identifier (PID) appended to the name automatically. |
-| TRACE_DIRECTORY_CLIENT = C:\Users\inmartin\Oracle\network\admin\sqlnetlogs | Folder where the traces are located. |
-| TRACE_TIMESTAMP_CLIENT = ON | To add a timestamp to the logs inside the file. |
-| DIAG_ADR_ENABLED=OFF | Required so we can configure all these parameters for the logs. |
-| TRACE_UNIQUE_CLIENT=ON | Unique trace file is created for each client trace session. |
-
 - To collect the logs, navigate to the specified folder.
 - Logs can be opened using notepad or another text editor.
 
@@ -323,14 +314,6 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 </table>
 </div>
 
-| Trace Config to Add | Description |
-|----------|----------|
-| TRACE_LEVEL_LISTENER = 16 | Support level logs (maximum info). |
-| TRACE_FILE_LISTENER = listener | Name of the log file. It will include the process identifier (pid) is appended to the name automatically.|
-| TRACE_DIRECTORY_LISTENER = C:\OracleServer\network\admin\listenerlogs | Folder where the traces are located. |
-| TRACE_TIMESTAMP_LISTENER = ON | To add a timestamp to the logs inside the file. |
-| DIAG_ADR_ENABLED_LISTENER= OFF | Required so we can configure all these parameters for the logs (ADR = Automatic Diagnostic Repository). |
-	
 - **Restart the listener** using cmd
   - _lsnrctl stop_
   - _lsnrctl start_
@@ -418,12 +401,11 @@ When checking the active **Oracle session**, the technical information in the er
 
 <br>
 From this session information I knew:
-- The **Mashup container PID =  <span style="background-color:#D9FAAA">4960</span>.** This allowed me to identify the mashup file directly
-- Was leveraging the **Oracle driver TID = <span style="background-color:#FADAAA">10144</span>.** This allowed me to identify the sqlnet logs from client side directly	
+- The **Mashup container PID =  <span style="background-color:#D9FAAA">4960</span>.** This allowed me to identify the Power BI mashup log file directly.
+- Was leveraging the **Oracle driver TID = <span style="background-color:#FADAAA">10144</span>.** This allowed me to identify the sqlnet logs from client side directly.
 - Using the **port from client side = <span style="background-color:#FAAABF">50679</span>.** This helped me narrow down the network traces.
 
-When checking the active **Oracle process**, I can do the same but correlating on the server side:
-
+When checking the active **Oracle process**, I repeat a similar similar analysis, this time correlating the information from the server side:
 
 <div style="overflow-x:auto;">
 
