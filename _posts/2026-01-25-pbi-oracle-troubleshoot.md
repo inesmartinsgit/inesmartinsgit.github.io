@@ -503,16 +503,16 @@ Knowing it was leveraging the driver TID = <span style="background-color:#FADAAA
 
 <div style="white-space: pre-wrap; font-style: italic; font-size:12px; word-wrap: break-word; max-width: 100%;">
 	
-	(10144) [24-JAN-2026 15:02:14:738] nsmore2recv: exit (0)
-	(10144) [24-JAN-2026 15:09:48:960] nioctl: entry
+	(10144) <span style="background:#DEDEDE;">[24-JAN-2026 15:02:14:738]</span> nsmore2recv: exit (0)
+	(10144) <span style="background:#DEDEDE;">[24-JAN-2026 15:09:48:960]</span> nioctl: entry
 	(…)
-	(10144) [24-JAN-2026 15:09:48:961] nsdofls: sending NSPTDA packet
+	(10144) <span style="background:#DEDEDE;">[24-JAN-2026 15:09:48:961]</span> <strong>nsdofls: sending NSPTDA packet</strong>
 	(10144) [24-JAN-2026 15:09:48:961] nspsend: entry
 	(10144) [24-JAN-2026 15:09:48:961] nspsend: plen=761, type=6
 	(10144) [24-JAN-2026 15:09:48:961] nttmwr: entry
 	(10144) [24-JAN-2026 15:09:48:962] nttmwr: socket 1712 had bytes written=761
 	(10144) [24-JAN-2026 15:09:48:962] nttmwr: exit
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: packet dump
+	(10144) [24-JAN-2026 15:09:48:962] <strong>nspsend: packet dump</strong>
 	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 00 02 F9 06 20 00 00  |........|
 	(…)
 	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 00 00 00 00 00 00 00  |........|
@@ -541,13 +541,13 @@ Knowing it was leveraging the driver TID = <span style="background-color:#FADAAA
 	(10144) [24-JAN-2026 15:09:48:962] nsdofls: exit (0)
 	(…)
 	(10144) [24-JAN-2026 15:10:07:880] ntt2err: entry
-	(10144) [24-JAN-2026 15:10:07:897] ntt2err: soc 1712 error - operation=5, ntresnt[0]=517, ntresnt[1]=54, ntresnt[2]=0
+	(10144) <span style="background:#DEDEDE;">[24-JAN-2026 15:10:07:897]</span> ntt2err: soc 1712 error - operation=5, ntresnt[0]=517, ntresnt[1]=54, ntresnt[2]=0
 	(10144) [24-JAN-2026 15:10:07:897] ntt2err: exit
 	(10144) [24-JAN-2026 15:10:07:897] nttmrd: socket 1712 had bytes read=-1
 	(10144) [24-JAN-2026 15:10:07:897] nttmrd: exit
 	(10144) [24-JAN-2026 15:10:07:897] nsprecv: error exit
 	(10144) [24-JAN-2026 15:10:07:897] nserror: entry
-	(10144) [24-JAN-2026 15:10:07:897] nserror: nsres: id=0, op=68, ns=12547, ns2=12560; nt[0]=517, nt[1]=54, nt[2]=0; ora[0]=0, ora[1]=0, ora[2]=0
+	(10144) <span style="background:#DEDEDE;">[24-JAN-2026 15:10:07:897]</span> nserror: nsres: id=0, op=68, ns=12547, ns2=12560; nt[0]=517, nt[1]=54, nt[2]=0; ora[0]=0, ora[1]=0, ora[2]=0
 	(10144) [24-JAN-2026 15:10:07:897] nsrdr: error exit
 	(…)
 	(10144) [24-JAN-2026 15:10:07:904] nioqer:  returning err = 3135
