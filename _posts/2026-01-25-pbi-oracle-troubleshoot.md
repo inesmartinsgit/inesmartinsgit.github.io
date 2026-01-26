@@ -39,7 +39,7 @@ All I wanted was to get back to building my report, so I created a clean Azure V
 
 My Oracle server was already running on a clean Azure VM so I thought this setup was good enough.
 
-⛔ **I was wrong.**
+⛔ I was wrong.
 
 Same exact error continued to happen.  <br>
 So I decided to put my reporting on hold and to dig deeper into the issue.
