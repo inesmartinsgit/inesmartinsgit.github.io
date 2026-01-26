@@ -244,8 +244,6 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 - Logs can be exported in several formats, though I prefer CSV.
 
 #### SQL NET logs - Oracle server and listener
-	
-- For this scenario there are no errors related to listener but I'll include them in the configuration in case you will find it useful.
 
 **SQL NET logs for Oracle server**
 
@@ -298,6 +296,7 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 
 **SQL NET logs for Oracle listener**
 
+- For this scenario there are no errors related to listener but I'll include them in the configuration in case you will find it useful.
 - **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\ drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
 - Edit the **listener.ora** file and add the following:
 
