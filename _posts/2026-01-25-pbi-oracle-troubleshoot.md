@@ -463,6 +463,8 @@ Knowing the mashup container process ID PID = <span style="background-color:#D9F
 
 💡 From this analysis, we can see that just before the error occurs, the connection **open request** and the **query sent** to the server are clearly visible.”
 
+<br>
+
 #### ODP.NET Driver Logs
 
 Knowing the Power BI mashup container process ID PID = <span style="background-color:#D9FAAA">4960</span> obtained from the session info, I was able to **convert it to HEX** to find the driver log file: **<span style="background-color:#D9FAAA">4960</span> (DEC) = <span style="background-color:#D1B69D">1360</span> (HEX)**: <br>
@@ -496,6 +498,8 @@ _**MICROSOFT.MASHUP.CONTAINER.NETFX45.EXE_PID_<span style="background-color:#D1B
 
 
 💡 Once again, just before the error occurs, the **connection open** request and the **query sent** to the server are visible, with timestamps and details matching those in the Power BI mashup logs.
+
+<br>
 
 #### SQLNET Client Logs
 
@@ -554,6 +558,8 @@ Knowing it was leveraging the driver TID = <span style="background-color:#FADAAA
 	
 </div>
 
+<br>
+
 💡 From this analysis, there is a clear **time gap between 15:02 and 15:09** (while I was not using the Power BI desktop). <br>
 Then at 15h09 the logs continue and the data packet being sent is visible: from the [Oracle's documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/troubleshooting-oracle-net-services.html), **NSPTDA** is used with **data packet types**. <br>
 Since there was no encryption I could see the packet dump and then correlate with the timestamps and error. <br>
@@ -570,16 +576,19 @@ Then, based on the **ntt2err** and **nserror** error codes, I was able to extrac
   - OS (windows) error code:  nt[1]=**54**
 	- An existing connection was forcibly closed by the remote host.
 
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/62305484-3b72-49ef-a33f-8fb981eb4387" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/62305484-3b72-49ef-a33f-8fb981eb4387" />
+
+<br>
+
 
 ### Server Log Analysis
 
 #### SQLNET Server Logs
 
-Knowing the server process ID  PID = 7900  obtained from the process info,  I was able to quickly locate the log file to analyze: server_7900.trc
+Knowing the server process ID  PID = <span style="background-color:#829FED">7900</span> obtained from the process info, I was able to quickly locate the log file to analyze: server_<span style="background-color:#829FED">7900</span>.trc
 
 <div style="white-space: pre-wrap; font-style: italic; font-size:12px; word-wrap: break-word; max-width: 100%;">
-	[24-JAN-2026 15:02:14:741] nsbasic_bsd: packet dump
+	<span style="background:#DEDEDE;">[24-JAN-2026 15:02:14:741]</span> nsbasic_bsd: <strong>packet dump</strong>
 	[24-JAN-2026 15:02:14:741] nsbasic_bsd: 00 00 02 BF 06 00 00 00  |........|
 (…)
 	[24-JAN-2026 15:02:14:742] nsbasic_bsd: 00 00 00 00 DB D9 FF 7F  |........|
@@ -591,10 +600,12 @@ Knowing the server process ID  PID = 7900  obtained from the process info,  I wa
 	[24-JAN-2026 15:02:14:742] nsbasic_bsd: 20 66 6F 75 6E 64 0A     |.found. |
 	[24-JAN-2026 15:02:14:742] nsbasic_bsd: exit (0)
 	[24-JAN-2026 15:02:14:742] nsbasic_brc: entry: oln/tot=0,prd=0
-	[24-JAN-2026 15:02:14:742] nttfprd: entry
+	<span style="background:#DEDEDE;">[24-JAN-2026 15:02:14:742]</span> nttfprd: entry
 </div>
 
-Last traces show the last packet dump which was successful but the timestamp was before the issue happens, matching the previous set of logs that I could see from the client logs at 15:02.
+💡 The last traces show the **last packet dump** which was successful but the **timestamp was before the issue happens**, matching the previous set of logs that I could see from the client logs at 15:02.
+
+<br>
 
 
 ### Client-Server Network Trace (wireshark)
