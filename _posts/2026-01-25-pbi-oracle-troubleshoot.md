@@ -433,7 +433,7 @@ From this session information I knew:
 - Was leveraging the **Oracle driver TID = <span style="background-color:#FADAAA">10144</span>.** This allowed me to identify the sqlnet logs from client side directly.
 - Using the **port from client side = <span style="background-color:#FAAABF">50679</span>.** This helped me narrow down the network traces.
 
-When checking the active **Oracle process**, I repeat a similar similar analysis, this time correlating the information from the server side:
+When checking the active **Oracle process**, I repeated a similar similar analysis, this time correlating the information from the server side:
 
 <div style="font-size:12px; overflow-x:auto;">
 
