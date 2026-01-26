@@ -38,7 +38,8 @@ So I decided to put my reporting on hold and to dig deeper into the issue.
 Like any good hunt, mine started with research. 
 
 I began by checking the Oracle error code using the **Oracle Database Error Messages** for this error code - [ORA-03135 - Database Error Messages](https://docs.oracle.com/en/error-help/db/ora-03135/) :
-<div style="white-space: pre-wrap; font-style: italic; font-size:12px; word-wrap: break-word; max-width: 100%;">
+
+<div style="font-style: italic;">
 - Cause
   - Server unexpectedly terminated or was forced to terminate.
   - Server timed out the connection.
@@ -49,9 +50,10 @@ I began by checking the Oracle error code using the **Oracle Database Error Mess
 
 This offered a few clues, but **nothing specific** enough to point me toward a solution.
 
+<br>
 Next, I went into my "smart-lazy mode" digging through community posts and hoping to find a quick fix, but **no luck.**
 
-
+<br>
 Before diving deep into a time-consuming investigation, I **ran a few tests:**
 - The connection lost contact while I was **multitasking**, so I tried staying fully active in the report and got no errors.
 - That gave me the hint that it was the **inactivity causing the error** (some kind of **idle timeout**).
@@ -59,9 +61,10 @@ Before diving deep into a time-consuming investigation, I **ran a few tests:**
 	
 It looked like a classic idle timeout of some component so I thought it was worth the investment on learning how to troubleshoot this rather than continuing with random tests.
 
+<br>
 📌 For this blog post, the scenario is intentionally simple, so only a few log files are generated. <br>
 In **real enterprise environments**, though, you may face **hundreds of logs to go through**, so knowing exactly where to look becomes essential.
-
+<br>
 
 # Figuring Out Who Talks to Whom
 
