@@ -343,7 +343,7 @@ Session ID: 396 Serial number: 44130<br>
 When checking the active **Oracle session**, the technical information in the error correlates directly with the information I needed to proceed further on checking the client side logs (below table is cropped to include relevant information).
 
 
-<div style="overflow-x:auto;">
+<div style="font-size:12px; overflow-x:auto;">
 
 <table>
   <tr>
@@ -407,7 +407,7 @@ From this session information I knew:
 
 When checking the active **Oracle process**, I repeat a similar similar analysis, this time correlating the information from the server side:
 
-<div style="overflow-x:auto;">
+<div style="font-size:12px; overflow-x:auto;">
 
 <table>
   <tr>
