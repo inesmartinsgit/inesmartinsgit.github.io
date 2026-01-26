@@ -198,6 +198,45 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 - **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
 - Edit the **sqlnet.ora** file and add the following:
 
+<div style="font-size:12px; overflow-x:auto;">
+<table>
+  <thead>
+    <tr>
+      <th>Trace Config to Add</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TRACE_LEVEL_SERVER = 16</td>
+      <td>Support level logs (maximum info).</td>
+    </tr>
+    <tr>
+      <td>TRACE_FILE_SERVER = server</td>
+      <td>
+        Name of the log file.<br>
+        It will include the process identifier (pid) appended to the name automatically.
+      </td>
+    </tr>
+    <tr>
+      <td>TRACE_DIRECTORY_SERVER = C:\OracleServer\network\admin\sqlnetlogs</td>
+      <td>Folder where the traces are located.</td>
+    </tr>
+    <tr>
+      <td>TRACE_TIMESTAMP_SERVER = ON</td>
+      <td>To add a timestamp to the logs inside the file.</td>
+    </tr>
+    <tr>
+      <td>DIAG_ADR_ENABLED = OFF</td>
+      <td>
+        Required so we can configure all these parameters for the logs 
+        (ADR = Automatic Diagnostic Repository).
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 | Trace Config to Add | Description |
 |----------|----------|
 | TRACE_LEVEL_SERVER = 16  | Support level logs (maximum info). |
@@ -223,8 +262,8 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 | DIAG_ADR_ENABLED_LISTENER= OFF | Required so we can configure all these parameters for the logs (ADR = Automatic Diagnostic Repository). |
 	
 - **Restart the listener** using cmd
-  - **_lsnrctl stop_**
-  - **_lsnrctl start_**
+  - _lsnrctl stop_
+  - _lsnrctl start_
 
 - To collect the logs, navigate to the specified folder.
 - Logs can be opened using notepad or another text editor.
