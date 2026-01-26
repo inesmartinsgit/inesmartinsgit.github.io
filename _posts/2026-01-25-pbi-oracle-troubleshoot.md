@@ -155,8 +155,8 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 - **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
 - Using the **registry editor**, navigate to the driver folder. It should be a similar to the following: _Computer\HKEY_LOCAL_MACHINE\SOFTWARE\ORACLE\ODP.NET\4.122.19.1_
 - Manually create 2 string values:
-  - **TraceFileLocation** - specifies the location of logs
-  - **TraceLevel = 7** - to enable all traces
+  - _TraceFileLocation_ - specifies the location of logs
+  - _TraceLevel = 7_ - to enable all traces
 - **Restart** the machine.
 - To collect the logs, navigate to the specified folder.
 
@@ -183,11 +183,11 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 
 #### Oracle server: Sessions and Processes
 	
-- Using Oracle SQL developer, connect to system and run:
-  - **_select * from v$session;_**
-  - **_select * from v$process;_**
+- Using **Oracle SQL developer**, connect to system and run:
+  - _select * from v$session;_
+  - _select * from v$process;_
 
-- Logs can be exported to several format (I prefer csv).
+- Logs can be exported in several formats, though I prefer CSV.
 
 #### SQL NET logs - Oracle server and listener
 	
