@@ -163,6 +163,8 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 
 ### Setting Up Client Logs
 
+<br>
+
 #### Power BI Desktop logs
 - Collect following the steps from Microsoft's documentation: [Power BI Desktop diagnostics collection](https://learn.microsoft.com/en-us/power-bi/fundamentals/desktop-diagnostics).
 
@@ -171,7 +173,7 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 #### ODP.NET unmanaged driver logs
 - **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
 - Using the **registry editor**, navigate to the driver folder. It should be a similar to the following: _Computer\HKEY_LOCAL_MACHINE\SOFTWARE\ORACLE\ODP.NET\4.122.19.1_
-- Manually create 2 string values:
+- Manually create **2 string values**:
   - _TraceFileLocation_ - specifies the location of logs
   - _TraceLevel = 7_ - to enable all traces
 - **Restart** the machine.
@@ -183,7 +185,7 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 
 #### SQL NET logs - Oracle client
 
-- **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
+- **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\ drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
 - Edit the **sqlnet.ora** file and add the following:
 
 <div style="font-size:12px; overflow-x:auto;">
@@ -247,7 +249,7 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 
 **SQL NET logs for Oracle server**
 
-- **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
+- **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\ drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
 - Edit the **sqlnet.ora** file and add the following:
 
 <div style="font-size:12px; overflow-x:auto;">
@@ -296,7 +298,7 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 
 **SQL NET logs for Oracle listener**
 
-- **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
+- **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\ drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
 - Edit the **listener.ora** file and add the following:
 
 <div style="font-size:12px; overflow-x:auto;">
