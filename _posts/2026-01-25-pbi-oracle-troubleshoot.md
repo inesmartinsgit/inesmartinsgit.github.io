@@ -533,7 +533,7 @@ _**MICROSOFT.MASHUP.CONTAINER.NETFX45.EXE_PID_<span style="background-color:#D1B
 
 #### SQLNET Client Logs
 
-Knowing it was leveraging the driver TID = <span style="background-color:#FADAAA">10144</span> I was able to find the SLQ.NET logs: client_<span style="background-color:#FADAAA">10144</span>.trc
+Knowing it was leveraging the driver TID = <span style="background-color:#FADAAA">10144</span> I was able to find the SLQ.NET logs: **client_<span style="background-color:#FADAAA">10144</span>.trc**
 
 <div style="white-space: pre-wrap; font-style: italic; font-size:12px; word-wrap: break-word; max-width: 100%;">
 	
