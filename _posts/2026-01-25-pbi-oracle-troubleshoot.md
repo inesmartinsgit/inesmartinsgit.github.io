@@ -647,7 +647,8 @@ Checking on the server network trace using the client VM IP 20.14.72.115, there 
 After correlating the logs and realizing the packet never reached the server, I went back to the basics and reviewed my setup.
 
 That’s when I uncovered a critical detail in [Azure’s networking documentation](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses).<br> 
-💡 There is a by design **limitation on Azure VMs**: "an adjustable **inbound originated flow idle timeout of 4-30 minutes**, with a **default of 4 minutes**, and **fixed outbound originated flow idle timeout of 4 minutes**".<br>
+💡 There is a by design **limitation affecting the public IPs of Azure VMs**: 
+- _"An adjustable **inbound originated flow idle timeout of 4-30 minutes**, with a **default of 4 minutes**, and **fixed outbound originated flow idle timeout of 4 minutes**"_
 Unfortunately I couldn't find any logs from Azure showing the connection drop explicitly but was able to confirm this was the root cause by applying the resolution steps described below.
 
 <br>
