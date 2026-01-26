@@ -513,44 +513,44 @@ Knowing it was leveraging the driver TID = <span style="background-color:#FADAAA
 	(10144) [24-JAN-2026 15:09:48:962] nttmwr: socket 1712 had bytes written=761
 	(10144) [24-JAN-2026 15:09:48:962] nttmwr: exit
 	(10144) [24-JAN-2026 15:09:48:962] <strong>nspsend: packet dump</strong>
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 00 02 F9 06 20 00 00  |........|
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 00 00 02 F9 06 20 00 00  |........|</span>
 	(…)
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 00 00 00 00 00 00 00  |........|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: FE 04 01 00 00 73 65 6C  |.....sel|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 65 63 74 20 22 24 4F 72  |ect."$Or|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 64 65 72 65 64 22 2E 22  |dered"."|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 52 45 47 49 4F 4E 5F 49  |REGION_I|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 44 22 2C 0D 0A 20 20 20  |D",.....|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 20 22 24 4F 72 64 65 72  |."$Order|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 65 64 22 2E 22 52 45 47  |ed"."REG|(…)
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 64 22 2E 22 52 45 47 49  |d"."REGI|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 4F 4E 5F 49 44 22 0D 0A  |ON_ID"..|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 66 65 74 63 68 20 6E 65  |fetch.ne|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 78 74 20 34 30 39 36 20  |xt.4096.|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 72 6F 77 73 20 6F 6E 6C  |rows.onl|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 79 00 00 00 00 01 00 00  |y.......|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 00 00 00 00 00 00 00  |........|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 00 00 00 00 00 00 00  |........|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 00 00 00 00 00 00 00  |........|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 01 00 00 00 00 00 00  |........|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 00 80 00 00 00 00 00  |........|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00 00 00 00 00 00 00 00  |........|
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: 00                       |.       |
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 00 00 00 00 00 00 00 00  |........|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: FE 04 01 00 00 73 65 6C  |.....sel|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 65 63 74 20 22 24 4F 72  |ect."$Or|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 64 65 72 65 64 22 2E 22  |dered"."|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 52 45 47 49 4F 4E 5F 49  |REGION_I|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 44 22 2C 0D 0A 20 20 20  |D",.....|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 20 22 24 4F 72 64 65 72  |."$Order|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 65 64 22 2E 22 52 45 47  |ed"."REG|</span>)
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 64 22 2E 22 52 45 47 49  |d"."REGI|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 4F 4E 5F 49 44 22 0D 0A  |ON_ID"..|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 66 65 74 63 68 20 6E 65  |fetch.ne|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 78 74 20 34 30 39 36 20  |xt.4096.|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 72 6F 77 73 20 6F 6E 6C  |rows.onl|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 79 00 00 00 00 01 00 00  |y.......|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 00 00 00 00 00 00 00 00  |........|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 00 00 00 00 00 00 00 00  |........|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 00 00 00 00 00 00 00 00  |........|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 00 01 00 00 00 00 00 00  |........|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 00 00 80 00 00 00 00 00  |........|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 00 00 00 00 00 00 00 00  |........|</span>
+	(10144) [24-JAN-2026 15:09:48:962] <span style="background-color:#F6FAAA">nspsend: 00                       |.       |</span>
 	(10144) [24-JAN-2026 15:09:48:962] nspsend: 761 bytes to transport
-	(10144) [24-JAN-2026 15:09:48:962] nspsend: normal exit
+	(10144) [24-JAN-2026 15:09:48:962] <strong>nspsend: normal exit</strong>
 	(10144) [24-JAN-2026 15:09:48:962] nsdofls: exit (0)
 	(…)
 	(10144) [24-JAN-2026 15:10:07:880] ntt2err: entry
 	(10144) <span style="background:#DEDEDE;">[24-JAN-2026 15:10:07:897]</span> ntt2err: soc 1712 error - operation=5, ntresnt[0]=517, ntresnt[1]=54, ntresnt[2]=0
 	(10144) [24-JAN-2026 15:10:07:897] ntt2err: exit
-	(10144) [24-JAN-2026 15:10:07:897] nttmrd: socket 1712 had bytes read=-1
+	(10144) [24-JAN-2026 15:10:07:897] <strong>nttmrd: socket 1712 had bytes read=-1</strong>
 	(10144) [24-JAN-2026 15:10:07:897] nttmrd: exit
 	(10144) [24-JAN-2026 15:10:07:897] nsprecv: error exit
 	(10144) [24-JAN-2026 15:10:07:897] nserror: entry
 	(10144) <span style="background:#DEDEDE;">[24-JAN-2026 15:10:07:897]</span> nserror: nsres: id=0, op=68, ns=12547, ns2=12560; nt[0]=517, nt[1]=54, nt[2]=0; ora[0]=0, ora[1]=0, ora[2]=0
 	(10144) [24-JAN-2026 15:10:07:897] nsrdr: error exit
 	(…)
-	(10144) [24-JAN-2026 15:10:07:904] nioqer:  returning err = 3135
+	(10144) [24-JAN-2026 15:10:07:904] nioqer:  <strong>returning err = 3135</strong>
 	
 </div>
 
