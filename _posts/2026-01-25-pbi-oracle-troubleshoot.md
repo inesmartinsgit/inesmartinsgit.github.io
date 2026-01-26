@@ -68,7 +68,7 @@ In **real enterprise environments**, though, you may face **hundreds of logs to 
 The simplified components and flow of my setup were the following:
 - **Azure VM - Client**: Public IP 20.14.72.115
   - Power BI Desktop generates queries using the Oracle connector.
-	- The connector leverages the ODP.NET unmanaged driver to establish the connection and send queries.
+  - The connector leverages the ODP.NET unmanaged driver to establish the connection and send queries.
 - **Azure VM - Server**: Public IP 20.163.1.157
   - The Oracle server (and listener) receives and processes the queries (dedicated server architecture).
 		
@@ -79,7 +79,7 @@ If want to dive deeper, I’ve listed some references at the end of the post.
 
 # When Simplifying Made Things Interesting
 
-To simplify the scenario and remove Power BI from the picture, I tested the same scenario using PowerShell (for more on this, refer to my previous blog post: - [Seamless Power BI and Oracle Integration: Key Learnings & Setup Tips](https://inesmartinsgit.github.io/2026/01/14/pbi-oracle-seamless.html) ).  <br>
+To simplify the scenario and remove Power BI from the picture, I tested the same scenario using **PowerShell** (for more on this, refer to my previous blog post: - [Seamless Power BI and Oracle Integration: Key Learnings & Setup Tips](https://inesmartinsgit.github.io/2026/01/14/pbi-oracle-seamless.html) ).  <br>
 
 Since my connection broke after around 5 minutes, I wrote a quick PowerShell script to wait 5 minutes before sending the next query.
 
@@ -120,62 +120,63 @@ $conn.Close()
 
 Guess what? 
 
-💡 **PowerShell had the same problem therefore the issue was not specific to the application (PowerShell/Power BI).**
+💡 **PowerShell had the same problem** therefore the issue was not specific to the application (PowerShell/Power BI).
 
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/f4194716-62d5-42bc-9d23-894aefa9d81d" />
 
 # Collecting Clues Through Logs
 
-To trace what was happening I started gathering logs from every part of the setup.
+To trace what was happening I started gathering logs from every part of the setup.<br>
 Here’s what I enabled:
 - On the Client:
-  - The Client tools (Power BI Desktop / PowerShell) - client logs
+  - The Client tools (Power BI Desktop / PowerShell) - Client logs
   - ODP.NET unmanaged driver - Oracle driver logs
   - Client VM connectivity:
     - Network trace - I prefer using Wireshark but you can use any tool you are comfortable.
     - SQL NET logs - Oracle client
 			
 - On the Server:
-  - Oracle server:
-    - Sessions
-	- Processes
+  - Oracle server session and process information.
   - Server VM connectivity: 
 	- Network trace
-	- SQL NET logs - oracle server
+	- SQL NET logs - Oracle server
 		
 
-The guidance below come from my Oracle 19 database and from a bit of trial‑and‑error testing. <br>
+📌 The guidance to enable the logs explained below comes from my Oracle 19 database and from a bit of trial‑and‑error testing. <br>
 You may need to adjust the steps for your own version, but the overall approach remains the same. <br>
 If you have feedback or ideas to improve it, I’d love to hear them!<br>
 
 ### Setting Up Client Logs
 
 #### Power BI Desktop logs
-- Collect following the steps from Microsoft's documentation https://learn.microsoft.com/en-us/power-bi/fundamentals/desktop-diagnostics
+- Collect following the steps from Microsoft's documentation: [Power BI Desktop diagnostics collection](https://learn.microsoft.com/en-us/power-bi/fundamentals/desktop-diagnostics).
 
 #### ODP.NET unmanaged driver logs
-- Using the registry editor, navigate to the driver folder: e.g. _Computer\HKEY_LOCAL_MACHINE\SOFTWARE\ORACLE\ODP.NET\4.122.19.1_
+- **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
+- Using the **registry editor**, navigate to the driver folder. It should be a similar to the following: _Computer\HKEY_LOCAL_MACHINE\SOFTWARE\ORACLE\ODP.NET\4.122.19.1_
 - Manually create 2 string values:
   - **TraceFileLocation** - specifies the location of logs
   - **TraceLevel = 7** - to enable all traces
-- Restart the machine
+- **Restart** the machine.
+- To collect the logs, navigate to the specified folder.
 
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/9b4605b6-15f6-4277-add4-4c8fec191165" />
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/9b4605b6-15f6-4277-add4-4c8fec191165" />
 
 #### SQL NET logs - Oracle client
-	
-- Edit the sqlnet.ora file and add the following:
+
+- **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
+- Edit the **sqlnet.ora** file and add the following:
 
 | Trace Config to Add | Description |
 |----------|----------|
 | TRACE_LEVEL_CLIENT = 16 | Support level logs (maximum info). |
 | TRACE_FILE_CLIENT = client | Name of the log file. <br> It includes the process identifier (PID) appended to the name automatically. |
-| TRACE_DIRECTORY_CLIENT = C:\Users\inmartin\Oracle\network\admin\sqlnetlogs | Folder where the traces are located. <br> Be careful with possible disk space issues and if possible select a non C:\ drive. |
+| TRACE_DIRECTORY_CLIENT = C:\Users\inmartin\Oracle\network\admin\sqlnetlogs | Folder where the traces are located. |
 | TRACE_TIMESTAMP_CLIENT = ON | To add a timestamp to the logs inside the file. |
 | DIAG_ADR_ENABLED=OFF | Required so we can configure all these parameters for the logs. |
 | TRACE_UNIQUE_CLIENT=ON | Unique trace file is created for each client trace session. |
 
-- Navigate to the folder.
+- To collect the logs, navigate to the specified folder.
 - Logs can be opened using notepad or another text editor.
 
 ### Setting Up Sever Logs
@@ -183,8 +184,8 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 #### Oracle server: Sessions and Processes
 	
 - Using Oracle SQL developer, connect to system and run:
-  - **select * from v$session;**
-  - **select * from v$process;**
+  - **_select * from v$session;_**
+  - **_select * from v$process;_**
 
 - Logs can be exported to several format (I prefer csv).
 
@@ -193,39 +194,40 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 - For this scenario there are no errors related to listener but I'll include them in the configuration in case you will find it useful.
 
 **SQL NET logs for Oracle server**
-	
-- Edit the sqlnet.ora file and add the following:
+
+- **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
+- Edit the **sqlnet.ora** file and add the following:
 
 | Trace Config to Add | Description |
 |----------|----------|
 | TRACE_LEVEL_SERVER = 16  | Support level logs (maximum info). |
 | TRACE_FILE_SERVER = server  | Name of the log file. <br> It will include the process identifier (pid) is appended to the name automatically. |
-| TRACE_DIRECTORY_SERVER = C:\OracleServer\network\admin\sqlnetlogs | Folder where the traces are located. <br> | Be careful with possible disk space issues and if possible select a non C:\drive. |
+| TRACE_DIRECTORY_SERVER = C:\OracleServer\network\admin\sqlnetlogs | Folder where the traces are located. |
 | TRACE_TIMESTAMP_SERVER = ON | To add a timestamp to the logs inside the file. |
 | DIAG_ADR_ENABLED= OFF | Required so we can configure all these parameters for the logs (ADR = Automatic Diagnostic Repository). |
 
-- Navigate to the folder.
+- To collect the logs, navigate to the specified folder.
 - Logs can be opened using notepad or another text editor.
 
 **SQL NET logs for Oracle listener**
-	
-- Edit the listener.ora file and add the following:
+
+- **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
+- Edit the **listener.ora** file and add the following:
 
 | Trace Config to Add | Description |
 |----------|----------|
 | TRACE_LEVEL_LISTENER = 16 | Support level logs (maximum info). |
 | TRACE_FILE_LISTENER = listener | Name of the log file. It will include the process identifier (pid) is appended to the name automatically.|
-| TRACE_DIRECTORY_LISTENER = C:\OracleServer\network\admin\listenerlogs | Folder where the traces are located. Be careful with possible disk space issues and if possible select a non C:\drive. |
+| TRACE_DIRECTORY_LISTENER = C:\OracleServer\network\admin\listenerlogs | Folder where the traces are located. |
 | TRACE_TIMESTAMP_LISTENER = ON | To add a timestamp to the logs inside the file. |
 | DIAG_ADR_ENABLED_LISTENER= OFF | Required so we can configure all these parameters for the logs (ADR = Automatic Diagnostic Repository). |
 	
-- Restart the listener using cmd
-  - **lsnrctl stop**
-  - **lsnrctl start**
+- **Restart the listener** using cmd
+  - **_lsnrctl stop_**
+  - **_lsnrctl start_**
 
-- To collect logs:
-  - Navigate to the folder.
-  - Logs can be opened using notepad or another text editor.
+- To collect the logs, navigate to the specified folder.
+- Logs can be opened using notepad or another text editor.
 
 
 # Walking Through the Failing Scenario
