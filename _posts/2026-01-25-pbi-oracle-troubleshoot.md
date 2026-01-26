@@ -37,7 +37,7 @@ So I decided to put my reporting on hold and to dig deeper into the issue.
 # The Hunt Begins
 Like any good hunt, mine started with research. 
 
-I began by checking the Oracle error code using the **Oracle Database Error Messages** for this error code - [ORA-03135 - Database Error Messages](https://docs.oracle.com/en/error-help/db/ora-03135/) :
+I began by checking the Oracle error code using the [Oracle Database Error Messages](https://docs.oracle.com/en/error-help/db/ora-03135/) for this error code: 
 - Cause
   - Server unexpectedly terminated or was forced to terminate.
   - Server timed out the connection.
@@ -547,31 +547,30 @@ Knowing it was leveraging the driver TID = <span style="background-color:#FADAAA
 	(10144) [24-JAN-2026 15:10:07:897] nttmrd: exit
 	(10144) [24-JAN-2026 15:10:07:897] nsprecv: error exit
 	(10144) [24-JAN-2026 15:10:07:897] nserror: entry
-	(10144) <span style="background:#DEDEDE;">[24-JAN-2026 15:10:07:897]</span> nserror: nsres: id=0, op=68, ns=12547, ns2=12560; nt[0]=517, nt[1]=54, nt[2]=0; ora[0]=0, ora[1]=0, ora[2]=0
+	(10144) <span style="background:#DEDEDE;">[24-JAN-2026 15:10:07:897]</span> nserror: nsres: id=0, op=68, ns=<strong>12547</strong>, ns2=<strong>12560</strong>; nt[0]=<strong>517</strong>, nt[1]=<strong>54</strong>, nt[2]=0; ora[0]=0, ora[1]=0, ora[2]=0
 	(10144) [24-JAN-2026 15:10:07:897] nsrdr: error exit
 	(…)
 	(10144) [24-JAN-2026 15:10:07:904] nioqer:  <strong>returning err = 3135</strong>
 	
 </div>
 
-There is a time gap between 15:02 and 15:09 (while I was not using the Power BI desktop). <br>
-Then at 15h09 the logs continue and, we see the data packet being sent: from the oracle documentation, NSPTDA is used with data packet types (se references below). <br>
+💡 From this analysis, there is a clear **time gap between 15:02 and 15:09** (while I was not using the Power BI desktop). <br>
+Then at 15h09 the logs continue and the data packet being sent is visible: from the [Oracle's documentation](https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/troubleshooting-oracle-net-services.html), **NSPTDA** is used with **data packet types**. <br>
 Since there was no encryption I could see the packet dump and then correlate with the timestamps and error. <br>
-The error codes are also explained in the Oracle documentation (see references below). <br>
 
-- Error Stack Component: NS - Network Session (main and secondary layers)
-  - Main TNS error: ns=12547
-	- TNS-12547: TNS:lost contact - cause: Partner has unexpectedly gone away, usually during process startup.
-  - Secondary error: ns2=12560;
-	- TNS-12560: TNS:protocol adapter error - cause: A generic protocol adapter error occurred.
-
-- Error Stack Component: NT - Network Transport (main, secondary, and operating system layers)
-  - Protocol adapter error: nt[0]=517
-	- TNS-00517: Lost contact - cause: Partner has unexpectedly gone away.
-  - OS (windows) error code:  nt[1]=54
+Then, based on the **ntt2err** and **nserror** error codes, I was able to extract additional information:
+- **Error Stack Component: NS - Network Session (main and secondary layers)**
+  - Main TNS error: ns=**12547**
+	- [TNS-12547](https://docs.oracle.com/en/error-help/db/tns-12547/?r=19c): TNS:lost contact - cause: Partner has unexpectedly gone away, usually during process startup.
+  - Secondary error: ns2=**12560**;
+	- [TNS-12560](https://docs.oracle.com/en/error-help/db/tns-12560/?r=19c): TNS:protocol adapter error - cause: A generic protocol adapter error occurred.
+- **Error Stack Component: NT - Network Transport** (main, secondary, and operating system layers)
+  - Protocol adapter error: nt[0]=**517**
+	- [TNS-00517](https://docs.oracle.com/en/error-help/db/tns-00517/?r=19c): Lost contact - cause: Partner has unexpectedly gone away.
+  - OS (windows) error code:  nt[1]=**54**
 	- An existing connection was forcibly closed by the remote host.
 
-<img width="768" height="211" alt="image" src="https://github.com/user-attachments/assets/62305484-3b72-49ef-a33f-8fb981eb4387" />
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/62305484-3b72-49ef-a33f-8fb981eb4387" />
 
 ### Server Log Analysis
 
