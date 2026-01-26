@@ -2,8 +2,6 @@
 title: "From Client to Server: An End-to-End Deep Dive Into Power BI-Oracle Connection Timeouts"
 ---
 
-<span style="color:red">Warning: Post under development.</span>
-
 <span style="color:grey"> _Disclaimer: Everything you’ll find here reflects my personal views and is not affiliated with Microsoft or Oracle._ </span>
 
 <br>
