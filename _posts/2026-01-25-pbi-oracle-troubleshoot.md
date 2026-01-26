@@ -6,11 +6,21 @@ title: "From Client to Server: An End-to-End Deep Dive Into Power BI-Oracle Conn
 
 <br>
 
-Troubleshooting a PowerBI-Oracle connection error can be challenging, especially when the error message is frustratingly generic.
+If you've ever investigated a generic Power BI-Oracle connectivity error, you know how quickly it can turn into a rabbit hole.<br>
+In my latest blog post, I walk through a real troubleshooting journey where a simple Power BI report turned into a full-blown investigation across Power BI and Oracle logs, network traces and considerations about Azure infrastructure. <br>
+The example used was very simple but the same approach can scale to complex enterprise setups including scenarios with on-premises data gateways. For those scenarios, you may face hundreds of logs to go through, so knowing exactly where to look becomes essential.<br>
 
 
-In this post, I’ll share my troubleshooting workflow and hands-on tips, using a real-life scenario as an example.<br>
-While the example involves Power BI Desktop, the same approach can scale to complex enterprise setups including scenarios with on-premises data gateways. <br>
+🔍 In this post you'll find:
+- An approach to simplify the scenarios as much as possible.
+- How to set up end‑to‑end log collection.
+- Using real-life logs as examples, how to investigate the logs by knowing quickly where and how to look.
+- The final “aha!” moment that solved the entire mystery.
+
+
+Whether you're building reports, supporting Power BI-Oracle integrations, or simply love a good troubleshooting story, this one’s for you.
+
+<br>
 
 # The Beginning of a Very Annoying Mystery
 
