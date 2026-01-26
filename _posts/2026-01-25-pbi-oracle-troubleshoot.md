@@ -38,15 +38,12 @@ So I decided to put my reporting on hold and to dig deeper into the issue.
 Like any good hunt, mine started with research. 
 
 I began by checking the Oracle error code using the **Oracle Database Error Messages** for this error code - [ORA-03135 - Database Error Messages](https://docs.oracle.com/en/error-help/db/ora-03135/) :
-
-<div style="font-style: italic;">
 - Cause
   - Server unexpectedly terminated or was forced to terminate.
   - Server timed out the connection.
 - Action 
   - Check if the server session was terminated.
   - Check if the timeout parameters are set properly in sqlnet.ora.
-</div>
 
 This offered a few clues, but **nothing specific** enough to point me toward a solution.
 
