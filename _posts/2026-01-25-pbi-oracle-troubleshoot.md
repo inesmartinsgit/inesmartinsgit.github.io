@@ -167,6 +167,46 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 - **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
 - Edit the **sqlnet.ora** file and add the following:
 
+<div style="font-size:12px; overflow-x:auto;">
+<table>
+  <thead>
+    <tr>
+      <th>Trace Config to Add</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TRACE_LEVEL_CLIENT = 16</td>
+      <td>Support level logs (maximum info).</td>
+    </tr>
+    <tr>
+      <td>TRACE_FILE_CLIENT = client</td>
+      <td>
+        Name of the log file.<br>
+        It includes the process identifier (PID) appended to the name automatically.
+      </td>
+    </tr>
+    <tr>
+      <td>TRACE_DIRECTORY_CLIENT = C:\Users\inmartin\Oracle\network\admin\sqlnetlogs</td>
+      <td>Folder where the traces are located.</td>
+    </tr>
+    <tr>
+      <td>TRACE_TIMESTAMP_CLIENT = ON</td>
+      <td>To add a timestamp to the logs inside the file.</td>
+    </tr>
+    <tr>
+      <td>DIAG_ADR_ENABLED = OFF</td>
+      <td>Required so we can configure all these parameters for the logs.</td>
+    </tr>
+    <tr>
+      <td>TRACE_UNIQUE_CLIENT = ON</td>
+      <td>Unique trace file is created for each client trace session.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 | Trace Config to Add | Description |
 |----------|----------|
 | TRACE_LEVEL_CLIENT = 16 | Support level logs (maximum info). |
@@ -236,14 +276,6 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
   </tbody>
 </table>
 </div>
-
-| Trace Config to Add | Description |
-|----------|----------|
-| TRACE_LEVEL_SERVER = 16  | Support level logs (maximum info). |
-| TRACE_FILE_SERVER = server  | Name of the log file. <br> It will include the process identifier (pid) is appended to the name automatically. |
-| TRACE_DIRECTORY_SERVER = C:\OracleServer\network\admin\sqlnetlogs | Folder where the traces are located. |
-| TRACE_TIMESTAMP_SERVER = ON | To add a timestamp to the logs inside the file. |
-| DIAG_ADR_ENABLED= OFF | Required so we can configure all these parameters for the logs (ADR = Automatic Diagnostic Repository). |
 
 - To collect the logs, navigate to the specified folder.
 - Logs can be opened using notepad or another text editor.
