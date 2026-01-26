@@ -451,54 +451,55 @@ From this process information I knew:
 Knowing the mashup container process ID PID = <span style="background-color:#D9FAAA">4960</span> obtained from the session info,  I was able to quickly locate the log file to analyze: _**Microsoft.Mashup.Container.NetFX45.<span style="background-color:#D9FAAA">4960</span>.2026-01-24T15-02-09-350038.log**_
 
 <div style="white-space: pre-wrap; font-style: italic; font-size:12px; word-wrap: break-word; max-width: 100%;">
-
-{"Start":"<span style='background:#DEDEDE;'>2026-01-24T15:09:48.9553912Z</span>","Action":"<strong>Engine/IO/Db/Oracle/Connection/Open</strong>","ResourceKind":"Oracle","ResourcePath":"20.163.1.157:1521/ines.internal.cloudapp.net","HostProcessId":"956","PartitionKey":"Section1/LOCATIONS/2","Server":"20.163.1.157:1521/ines.internal.cloudapp.net","RequireEncryption":"False","ConnectionTimeout":"15","ConnectionId":"957c17d0-db30-4833-a3ab-70b9c1e43935","ProductVersion":"2.149.1054.0 (25.11)+fe0a1c0f2fc6e9cf0939a7efabedc7cdb3358bad","ActivityId":"86d59d77-7be2-43f3-afc3-8dfab4ef4b1b","Process":"Microsoft.Mashup.Container.NetFX45","Pid":4960,"Tid":1,"Duration":"00:00:00.0004251"}
-
-{"Start":"<span style='background:#DEDEDE;'>2026-01-24T15:09:48.9558422Z</span>","Action":"<strong>Engine/IO/Db/Oracle/Command/ExecuteDbDataReader</strong>","ResourceKind":"Oracle","ResourcePath":"20.163.1.157:1521/ines.internal.cloudapp.net","HostProcessId":"956","PartitionKey":"Section1/LOCATIONS/2","Server":"20.163.1.157:1521/ines.internal.cloudapp.net","CommandText":"<span style='background:#F6FAAA;'>select \"$Ordered\".\"REGION_ID\",\n    \"$Ordered\".\"REGION_NAME\"\nfrom\n(\n    select \"_\".\"REGION_ID\",\n        \"_\".\"REGION_NAME\"\n    from \"HR\".\"REGIONS\" \"_\"\n    where \"_\".\"REGION_ID\" = 3\n) \"$Ordered\"\norder by \"$Ordered\".\"REGION_ID\"\nfetch next 4096 rows only</span>","CommandTimeout":"600","ConnectionId":"957c17d0-db30-4833-a3ab-70b9c1e43935","Behavior":"Default","Exception":"Exception:\nExceptionType: Oracle.DataAccess.Client.OracleException\nMessage: ORA-03135: connection lost contact\nProcess ID: 7900\nSession ID: 396 Serial number: 44130\nStackTrace:\n   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(...)\n   at Oracle.DataAccess.Client.OracleCommand.ExecuteReader(...)\n","ProductVersion":"2.149.1054.0 (25.11)+fe0a1c0f2fc6e9cf0939a7efabedc7cdb3358bad","ActivityId":"86d59d77-7be2-43f3-afc3-8dfab4ef4b1b","Process":"Microsoft.Mashup.Container.NetFX45","Pid":4960,"Tid":1,"Duration":"00:00:19.4224248"}
-
-{"Start":"<span style='background:#DEDEDE;'>2026-01-24T15:10:08.3951188Z</span>","Action":"<strong>Engine/IO/Db/Oracle/Connection/Close</strong>","ResourceKind":"Oracle","ResourcePath":"20.163.1.157:1521/ines.internal.cloudapp.net","HostProcessId":"956","PartitionKey":"Section1/LOCATIONS/2","Server":"20.163.1.157:1521/ines.internal.cloudapp.net","ConnectionId":"957c17d0-db30-4833-a3ab-70b9c1e43935","ProductVersion":"2.149.1054.0 (25.11)+fe0a1c0f2fc6e9cf0939a7efabedc7cdb3358bad","ActivityId":"86d59d77-7be2-43f3-afc3-8dfab4ef4b1b","Process":"Microsoft.Mashup.Container.NetFX45","Pid":4960,"Tid":1,"Duration":"00:00:00.0099732"}
+	
+	{"Start":"<span style='background:#DEDEDE;'>2026-01-24T15:09:48.9553912Z</span>","Action":"<strong>Engine/IO/Db/Oracle/Connection/Open</strong>","ResourceKind":"Oracle","ResourcePath":"20.163.1.157:1521/ines.internal.cloudapp.net","HostProcessId":"956","PartitionKey":"Section1/LOCATIONS/2","Server":"20.163.1.157:1521/ines.internal.cloudapp.net","RequireEncryption":"False","ConnectionTimeout":"15","ConnectionId":"957c17d0-db30-4833-a3ab-70b9c1e43935","ProductVersion":"2.149.1054.0 (25.11)+fe0a1c0f2fc6e9cf0939a7efabedc7cdb3358bad","ActivityId":"86d59d77-7be2-43f3-afc3-8dfab4ef4b1b","Process":"Microsoft.Mashup.Container.NetFX45","Pid":4960,"Tid":1,"Duration":"00:00:00.0004251"}
+	
+	{"Start":"<span style='background:#DEDEDE;'>2026-01-24T15:09:48.9558422Z</span>","Action":"<strong>Engine/IO/Db/Oracle/Command/ExecuteDbDataReader</strong>","ResourceKind":"Oracle","ResourcePath":"20.163.1.157:1521/ines.internal.cloudapp.net","HostProcessId":"956","PartitionKey":"Section1/LOCATIONS/2","Server":"20.163.1.157:1521/ines.internal.cloudapp.net","CommandText":"<span style='background:#F6FAAA;'>select \"$Ordered\".\"REGION_ID\",\n    \"$Ordered\".\"REGION_NAME\"\nfrom\n(\n    select \"_\".\"REGION_ID\",\n        \"_\".\"REGION_NAME\"\n    from \"HR\".\"REGIONS\" \"_\"\n    where \"_\".\"REGION_ID\" = 3\n) \"$Ordered\"\norder by \"$Ordered\".\"REGION_ID\"\nfetch next 4096 rows only</span>","CommandTimeout":"600","ConnectionId":"957c17d0-db30-4833-a3ab-70b9c1e43935","Behavior":"Default","Exception":"Exception:\nExceptionType: Oracle.DataAccess.Client.OracleException\nMessage: ORA-03135: connection lost contact\nProcess ID: 7900\nSession ID: 396 Serial number: 44130\nStackTrace:\n   at Oracle.DataAccess.Client.OracleException.HandleErrorHelper(...)\n   at Oracle.DataAccess.Client.OracleCommand.ExecuteReader(...)\n","ProductVersion":"2.149.1054.0 (25.11)+fe0a1c0f2fc6e9cf0939a7efabedc7cdb3358bad","ActivityId":"86d59d77-7be2-43f3-afc3-8dfab4ef4b1b","Process":"Microsoft.Mashup.Container.NetFX45","Pid":4960,"Tid":1,"Duration":"00:00:19.4224248"}
+	
+	{"Start":"<span style='background:#DEDEDE;'>2026-01-24T15:10:08.3951188Z</span>","Action":"<strong>Engine/IO/Db/Oracle/Connection/Close</strong>","ResourceKind":"Oracle","ResourcePath":"20.163.1.157:1521/ines.internal.cloudapp.net","HostProcessId":"956","PartitionKey":"Section1/LOCATIONS/2","Server":"20.163.1.157:1521/ines.internal.cloudapp.net","ConnectionId":"957c17d0-db30-4833-a3ab-70b9c1e43935","ProductVersion":"2.149.1054.0 (25.11)+fe0a1c0f2fc6e9cf0939a7efabedc7cdb3358bad","ActivityId":"86d59d77-7be2-43f3-afc3-8dfab4ef4b1b","Process":"Microsoft.Mashup.Container.NetFX45","Pid":4960,"Tid":1,"Duration":"00:00:00.0099732"}
 
 </div>
 
 
-Before the error occurs, it's visible the connection open request and the query sent to the server.
+💡 From this analysis, we can see that just before the error occurs, the connection **open request** and the **query sent** to the server are clearly visible.”
 
 #### ODP.NET Driver Logs
 
-Knowing the Power BI mashup container process ID PID = <span style="background-color:#D9FAAA">4960</span> obtained from the session info, I was able to **convert it to HEX** to find the driver log file: **<span style="background-color:#D9FAAA">4960</span> (DEC) = <span style="background-color:#D1B69D">1360</span> (HEX)** - _**MICROSOFT.MASHUP.CONTAINER.NETFX45.EXE_PID_<span style="background-color:#D1B69D">1360</span>_DATE_2026_01_24_TIME_15_02_14_000333.trc**_
+Knowing the Power BI mashup container process ID PID = <span style="background-color:#D9FAAA">4960</span> obtained from the session info, I was able to **convert it to HEX** to find the driver log file: **<span style="background-color:#D9FAAA">4960</span> (DEC) = <span style="background-color:#D1B69D">1360</span> (HEX)**: <br>
+_**MICROSOFT.MASHUP.CONTAINER.NETFX45.EXE_PID_<span style="background-color:#D1B69D">1360</span>_DATE_2026_01_24_TIME_15_02_14_000333.trc**_
 
 <div style="white-space: pre-wrap; font-style: italic; font-size:12px; word-wrap: break-word; max-width: 100%;">
 	
-TIME:<span style="background:#DEDEDE;">2026/01/24-15:09:48:961</span> TID:27a0  OracleConnection::Open() => Calling RequestBegin
-(…)
-TIME:2026/01/24-15:09:48:961 TID:27a0  (INFO) (OracleConnectionOCP.Open) Pool Id=531559270 PooledConCtx=40026340 sessid=<span style="background-color:#AAFABE">396</span> serial=<span style="background-color:#42D4BC">44130</span> inst=ines ConCtx=(2405dcbd1a0)
-(…)
-TIME:<span style="background:#DEDEDE;">2026/01/24-15:09:48:961</span> TID:27a0  SqlInit(): SQL: <span style="background-color:#F6FAAA">select "$Ordered"."REGION_ID",
-    "$Ordered"."REGION_NAME"
-from 
-(
-    select "_"."REGION_ID",
-        "_"."REGION_NAME"
-    from "HR"."REGIONS" "_"
-    where "_"."REGION_ID" = 3
-) "$Ordered"
-order by "$Ordered"."REGION_ID"
-fetch next 4096 rows only</span>
-(…)
-TIME:2026/01/24-15:10:08:007 TID:27a0  (EXIT)  OpsSqlExecuteReader(): RetCode=-1 Line=783
-TIME:2026/01/24-15:10:08:013 TID:27a0  (ENTRY) OpsErrGetOpoCtx()
-TIME:<span style="background:#DEDEDE;">2026/01/24-15:10:08:014</span> TID:27a0  <span style="background:#F77059;">(ERROR) Oracle error code=3135; Oracle msg=ORA-03135: connection lost contact
-Process ID: 7900
-Session ID: 396 Serial number: 44130</span>
+	TIME:<span style="background:#DEDEDE;">2026/01/24-15:09:48:961</span> TID:27a0  OracleConnection::Open() => Calling RequestBegin
+	(…)
+	TIME:2026/01/24-15:09:48:961 TID:27a0  (INFO) (OracleConnectionOCP.Open) Pool Id=531559270 PooledConCtx=40026340 sessid=<span style="background-color:#AAFABE">396</span> serial=<span style="background-color:#42D4BC">44130</span> inst=ines ConCtx=(2405dcbd1a0)
+	(…)
+	TIME:<span style="background:#DEDEDE;">2026/01/24-15:09:48:961</span> TID:27a0  SqlInit(): SQL: <span style="background-color:#F6FAAA">select "$Ordered"."REGION_ID",
+	    "$Ordered"."REGION_NAME"
+	from 
+	(
+	    select "_"."REGION_ID",
+	        "_"."REGION_NAME"
+	    from "HR"."REGIONS" "_"
+	    where "_"."REGION_ID" = 3
+	) "$Ordered"
+	order by "$Ordered"."REGION_ID"
+	fetch next 4096 rows only</span>
+	(…)
+	TIME:2026/01/24-15:10:08:007 TID:27a0  (EXIT)  OpsSqlExecuteReader(): RetCode=-1 Line=783
+	TIME:2026/01/24-15:10:08:013 TID:27a0  (ENTRY) OpsErrGetOpoCtx()
+	TIME:<span style="background:#DEDEDE;">2026/01/24-15:10:08:014</span> TID:27a0  <span style="background:#F77059;">(ERROR) Oracle error code=3135; Oracle msg=ORA-03135: connection lost contact
+	Process ID: 7900
+	Session ID: 396 Serial number: 44130</span>
 
 </div>
 
 
-Once again, before the error it's visible the connection open request and the query sent to the server with the timestamps and info matching the Power BI mashup logs.
+💡 Once again, just before the error occurs, the **connection open** request and the **query sent** to the server are visible, with timestamps and details matching those in the Power BI mashup logs.
 
 #### SQLNET Client Logs
 
-Knowing it was leveraging the driver TID = 10144 I was able to find the SLQ.NET logs: client_10144.trc
+Knowing it was leveraging the driver TID = <span style="background-color:#FADAAA">10144</span> I was able to find the SLQ.NET logs: client_<span style="background-color:#FADAAA">10144</span>.trc
 
 <div style="white-space: pre-wrap; font-style: italic; font-size:12px; word-wrap: break-word; max-width: 100%;">
 	
