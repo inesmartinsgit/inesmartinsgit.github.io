@@ -32,6 +32,8 @@ My Oracle server was already running on a clean Azure VM so I thought this setup
 Same exact error continued to happen.  <br>
 So I decided to put my reporting on hold and to dig deeper into the issue.
 
+<br>
+
 # The Hunt Begins
 Like any good hunt, mine started with research. 
 
@@ -59,6 +61,7 @@ It looked like a classic idle timeout of some component so I thought it was wort
 <br>
 📌 For this blog post, the scenario is intentionally simple, so only a few log files are generated. <br>
 In **real enterprise environments**, though, you may face **hundreds of logs to go through**, so knowing exactly where to look becomes essential.
+
 <br>
 
 # Figuring Out Who Talks to Whom
@@ -144,10 +147,14 @@ Here’s what I enabled:
 You may need to adjust the steps for your own version, but the overall approach remains the same. <br>
 If you have feedback or ideas to improve it, I’d love to hear them!<br>
 
+<br>
+
 ### Setting Up Client Logs
 
 #### Power BI Desktop logs
 - Collect following the steps from Microsoft's documentation: [Power BI Desktop diagnostics collection](https://learn.microsoft.com/en-us/power-bi/fundamentals/desktop-diagnostics).
+
+<br>
 
 #### ODP.NET unmanaged driver logs
 - **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
@@ -159,6 +166,8 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 - To collect the logs, navigate to the specified folder.
 
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/9b4605b6-15f6-4277-add4-4c8fec191165" />
+
+<br>
 
 #### SQL NET logs - Oracle client
 
@@ -207,6 +216,8 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 
 - To collect the logs, navigate to the specified folder.
 - Logs can be opened using notepad or another text editor.
+
+<br>
 
 ### Setting Up Sever Logs
 
@@ -269,6 +280,8 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 - To collect the logs, navigate to the specified folder.
 - Logs can be opened using notepad or another text editor.
 
+<br>
+
 **SQL NET logs for Oracle listener**
 
 - **Create a folder** where the files will be located. Be careful with possible disk space issues and if possible select a non C:\drive. For scenarios with on-premises data gateway, don't choose a folder within a user folder.
@@ -319,6 +332,7 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 - To collect the logs, navigate to the specified folder.
 - Logs can be opened using notepad or another text editor.
 
+<br>
 
 # Walking Through the Failing Scenario
 
@@ -335,6 +349,8 @@ Process ID: 7900<br>
 Session ID: 396 Serial number: 44130<br>
 &nbsp;&nbsp;&nbsp;&nbsp;ErrorCode=-2147467259<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span style="background-color:#EBAAFA">NativeError=3135</span><br>_
+
+<br>
 
 ### Oracle Server - Session and Process
 
@@ -398,6 +414,7 @@ When checking the active **Oracle session**, the technical information in the er
 </div>
 
 <br>
+
 From this session information I knew:
 - The **Mashup container PID =  <span style="background-color:#D9FAAA">4960</span>.** This allowed me to identify the Power BI mashup log file directly.
 - Was leveraging the **Oracle driver TID = <span style="background-color:#FADAAA">10144</span>.** This allowed me to identify the sqlnet logs from client side directly.
@@ -441,6 +458,8 @@ When checking the active **Oracle process**, I repeat a similar similar analysis
 
 From this process information I knew:
 - The **Server PID = <span style="background-color:#829FED">7900</span>.** This allowed me to identify the sqlnet logs from server side directly.
+
+<br>
 
 ### Client Log Analysis
 
@@ -577,7 +596,6 @@ Since there was no encryption I could see the packet dump and then correlate wit
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/62305484-3b72-49ef-a33f-8fb981eb4387" />
 
 <br>
-
 
 ### Server Log Analysis
 
