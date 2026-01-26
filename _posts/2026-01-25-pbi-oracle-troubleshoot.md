@@ -7,7 +7,9 @@ title: "From Client to Server: An End-to-End Deep Dive Into Power BI-Oracle Conn
 <br>
 
 If you've ever investigated a generic Power BI-Oracle connectivity error, you know how quickly it can turn into a rabbit hole.<br>
-In my latest blog post, I walk through a real troubleshooting journey where a simple Power BI report turned into a full-blown investigation across Power BI and Oracle logs, network traces and considerations about Azure infrastructure. <br>
+
+In this blog post, I walk through a real troubleshooting journey where a simple Power BI report turned into a full-blown investigation across Power BI and Oracle logs, network traces and considerations about Azure infrastructure. <br>
+
 The example used was very simple but the same approach can scale to complex enterprise setups including scenarios with on-premises data gateways. For those scenarios, you may face hundreds of logs to go through, so knowing exactly where to look becomes essential.<br>
 
 
