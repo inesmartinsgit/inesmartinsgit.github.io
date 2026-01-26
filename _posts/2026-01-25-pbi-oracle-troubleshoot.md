@@ -617,17 +617,17 @@ From the **client network trace**:
 - Ultimately, the **connection was closed.**
 
 <img width="1200" alt="image" src="https://github.com/user-attachments/assets/eadf2a67-4c0c-4340-922b-3c6d6d9cc00a" />
-
+<br>
 From the **server network trace**, the **same packet could not be found**.
-
+<br>
 <img width="1200" alt="image" src="https://github.com/user-attachments/assets/3d9bdd92-ce86-4825-8a5a-3d66b6b57de3" />
-
+<br>
 The previous packet in the same stream can be found on the server side matching the previous query at 15:02 as seen in the Power BI mashup logs and SQL NET logs.
-
+<br>
 <img width="1200" alt="image" src="https://github.com/user-attachments/assets/5667c792-1b83-47a5-8227-4d8d89a2a842" />
-
+<br>
 Checking on the server network trace using the client VM IP 20.14.72.115, there is a time gap with **no traces between 15:02 and 15:11.**
-
+<br>
 <img width="1200" alt="image" src="https://github.com/user-attachments/assets/4bc35660-6ff0-4301-81b8-eacfd1ac170f" />
 
 <br>
