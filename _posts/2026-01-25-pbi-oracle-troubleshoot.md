@@ -1,14 +1,14 @@
 ---
-title: "From Client to Server: A Full End-to-End Deep Dive Into a Power BI - Oracle Connection Timeout"
+title: "From Client to Server: An End-to-End Deep Dive Into Power BI-Oracle Connection Timeouts"
 ---
 
-<span style="color:red">Warning: Post under development, not complete yet.</span>
+<span style="color:red">Warning: Post under development.</span>
 
 <span style="color:grey"> _Disclaimer: Everything you’ll find here reflects my personal views and is not affiliated with Microsoft or Oracle._ </span>
 
 <br>
 
-Troubleshooting an Oracle connection error can be challenging, especially when the error message is frustratingly generic.
+Troubleshooting a PowerBI-Oracle connection error can be challenging, especially when the error message is frustratingly generic.
 
 
 In this post, I’ll share my troubleshooting workflow and hands-on tips, using a real-life scenario as an example.<br>
@@ -24,7 +24,7 @@ Forcing a **Refresh Preview** fixed it temporarily, but that only confirmed some
 <img width="1200" alt="image" src="https://github.com/user-attachments/assets/4298e793-56b9-45d7-888a-0fca614b3c6c" />
 
 <br>
-All I wanted was to get back to building my report, so I created a clean Azure VM to host my Power BI desktop and Oracle driver ODP.NET unmanaged (for guidance on this, refer to my previous blog post - [Seamless Power BI and Oracle Integration: Key Learnings & Setup Tips](https://inesmartinsgit.github.io/2026/01/14/pbi-oracle-seamless.html) ).  <br>
+All I wanted was to get back to building my report, so I created a clean Azure VM to host my Power BI Desktop and Oracle driver ODP.NET unmanaged (for guidance on this, refer to my previous blog post - [Seamless Power BI and Oracle Integration: Key Learnings & Setup Tips](https://inesmartinsgit.github.io/2026/01/14/pbi-oracle-seamless.html) ).  <br>
 <br>
 
 My Oracle server was already running on a clean Azure VM so I thought this setup was good enough.
@@ -37,15 +37,15 @@ So I decided to put my reporting on hold and to dig deeper into the issue.
 # The Hunt Begins
 Like any good hunt, mine started with research. 
 
-I began by checking the Oracle error code using the **Oracle database error messages** for this error code - [ORA-03135 - Database Error Messages](https://docs.oracle.com/en/error-help/db/ora-03135/) :
-
-- Cause <br>
-		a. Server unexpectedly terminated or was forced to terminate.<br>
-		b. Server timed out the connection.<br>
-	
-- Action <br>
-		a. Check if the server session was terminated <br>
-		b. Check if the timeout parameters are set properly in sqlnet.ora. <br>
+I began by checking the Oracle error code using the **Oracle Database Error Messages** for this error code - [ORA-03135 - Database Error Messages](https://docs.oracle.com/en/error-help/db/ora-03135/) :
+<div style="white-space: pre-wrap; font-style: italic; font-size:12px; word-wrap: break-word; max-width: 100%;">
+- Cause
+  - Server unexpectedly terminated or was forced to terminate.
+  - Server timed out the connection.
+- Action 
+  - Check if the server session was terminated.
+  - Check if the timeout parameters are set properly in sqlnet.ora.
+</div>
 
 This offered a few clues, but **nothing specific** enough to point me toward a solution.
 
