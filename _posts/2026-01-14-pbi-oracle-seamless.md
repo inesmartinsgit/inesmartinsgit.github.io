@@ -56,7 +56,7 @@ The latest versions are packaged into **OCMT - Oracle Client for Microsoft Tools
 
 In the example below, if I leave the default location under my user, I can only use the driver with Power BI Desktop and not the OPDG:
 
-<img height="400" alt="image" src="https://github.com/user-attachments/assets/08d8b503-7a78-4cfd-a78d-86876e010423" />
+<img height="400" alt="image" src="images/post1/odac.png" />
 
 
 This driver needs to be **installed on each client machine** where you want to connect to Oracle. 
