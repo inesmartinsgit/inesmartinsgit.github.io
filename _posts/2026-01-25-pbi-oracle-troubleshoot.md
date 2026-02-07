@@ -31,7 +31,7 @@ Forcing a **Refresh Preview** fixed it temporarily, but that only confirmed some
 
 ⚠️ Was something on my machine interfering with the connection? <br>
 
-<img width="1200" alt="image" src="https://github.com/user-attachments/assets/4298e793-56b9-45d7-888a-0fca614b3c6c" />
+<img width="1200" alt="image" src="/images/post2/desktoperror.png" />
 
 <br>
 All I wanted was to get back to building my report, so I created a clean Azure VM to host my Power BI Desktop and Oracle driver ODP.NET unmanaged (for guidance on this, refer to my previous blog post - [Seamless Power BI and Oracle Integration: Key Learnings & Setup Tips](https://inesmartinsgit.github.io/2026/01/14/pbi-oracle-seamless.html) ).  <br>
@@ -60,9 +60,11 @@ I began by checking the Oracle error code using the [Oracle Database Error Messa
 This offered a few clues, but **nothing specific** enough to point me toward a solution.
 
 <br>
+
 Next, I went into my "smart-lazy mode" digging through community posts and hoping to find a quick fix, but **no luck.**
 
 <br>
+
 Before diving deep into a time-consuming investigation, I **ran a few tests:**
 - The connection lost contact while I was **multitasking**, so I tried staying fully active in the report and got no errors.
 - That gave me the hint that it was the **inactivity causing the error** (some kind of **idle timeout**).
@@ -71,6 +73,7 @@ Before diving deep into a time-consuming investigation, I **ran a few tests:**
 It looked like a classic idle timeout of some component so I thought it was worth the investment on learning how to troubleshoot this rather than continuing with random tests.
 
 <br>
+
 📌 For this blog post, the scenario is intentionally simple, so only a few log files are generated. <br>
 In **real enterprise environments**, though, you may face **hundreds of logs to go through**, so knowing exactly where to look becomes essential.
 
@@ -135,7 +138,7 @@ Guess what?
 
 💡 **PowerShell had the same problem** therefore the issue was not specific to the application (PowerShell/Power BI).
 
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/f4194716-62d5-42bc-9d23-894aefa9d81d" />
+<img width="700" alt="image" src="/images/post2/powershellerror.png" />
 
 # Collecting Clues Through Logs
 
@@ -179,7 +182,7 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 - **Restart** the machine.
 - To collect the logs, navigate to the specified folder.
 
-<img width="600" alt="image" src="https://github.com/user-attachments/assets/9b4605b6-15f6-4277-add4-4c8fec191165" />
+<img width="600" alt="image" src="/images/post2/registryeditor.png" />
 
 <br>
 
@@ -498,6 +501,7 @@ Knowing the mashup container process ID PID = <span style="background-color:#D9F
 #### ODP.NET Driver Logs
 
 Knowing the Power BI mashup container process ID PID = <span style="background-color:#D9FAAA">4960</span> obtained from the session info, I was able to **convert it to HEX** to find the driver log file: **<span style="background-color:#D9FAAA">4960</span> (DEC) = <span style="background-color:#D1B69D">1360</span> (HEX)**: <br>
+
 _**MICROSOFT.MASHUP.CONTAINER.NETFX45.EXE_PID_<span style="background-color:#D1B69D">1360</span>_DATE_2026_01_24_TIME_15_02_14_000333.trc**_
 
 <div style="white-space: pre-wrap; font-style: italic; font-size:12px; word-wrap: break-word; max-width: 100%;">
@@ -606,7 +610,7 @@ Since there was no encryption I could see the packet dump and then correlate wit
   - OS (windows) error code:  nt[1]=**54**
 	- An existing connection was forcibly closed by the remote host.
 
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/62305484-3b72-49ef-a33f-8fb981eb4387" />
+<img width="500" alt="image" src="/images/post2/cmderrorcode.png" />
 
 <br>
 
@@ -647,7 +651,7 @@ From the **client network trace**:
 - But then, the same query was trying to be **retransmitted**.
 - Ultimately, the **connection was closed.**
 
-<img width="1200" alt="image" src="https://github.com/user-attachments/assets/eadf2a67-4c0c-4340-922b-3c6d6d9cc00a" />
+<img width="1200" alt="image" src="/images/post2/wireshark1.png" />
 
 <br>
 
@@ -655,7 +659,7 @@ From the **server network trace**, the **same packet could not be found**.
 
 <br>
 
-<img width="1200" alt="image" src="https://github.com/user-attachments/assets/3d9bdd92-ce86-4825-8a5a-3d66b6b57de3" />
+<img width="1200" alt="image" src="/images/post2/wireshark2.png" />
 
 <br>
 
@@ -663,14 +667,14 @@ The previous packet in the same stream can be found on the server side matching 
 
 <br>
 
-<img width="1200" alt="image" src="https://github.com/user-attachments/assets/5667c792-1b83-47a5-8227-4d8d89a2a842" />
+<img width="1200" alt="image" src="/images/post2/wireshark3.png" />
 
 <br>
 
 Checking on the server network trace using the client VM IP 20.14.72.115, there is a time gap with **no traces between 15:02 and 15:11.**
 
 <br>
-<img width="1200" alt="image" src="https://github.com/user-attachments/assets/4bc35660-6ff0-4301-81b8-eacfd1ac170f" />
+<img width="1200" alt="image" src="/images/post2/wireshark4.png" />
 
 <br>
 
