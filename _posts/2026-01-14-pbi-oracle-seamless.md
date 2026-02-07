@@ -78,7 +78,7 @@ To do this, run the following command:
 
 You will see something like this:
 
-<img  height="130" alt="image" src="https://github.com/user-attachments/assets/9646c2e8-eb62-4380-8630-829597106a3d" />
+<img  height="130" alt="image" src="/images/post1/powershell.png" />
 
 
 This confirms that the driver is installed and, for this example, it confirms that is Version 4.122.19.1 (the naming convention is explained in depth in Oracle documentation pages if you want more information).
@@ -131,7 +131,7 @@ If you want to make it a bit more complex, you can consider including a config f
 
 I recommend by starting to copy the sample of this file provided by OCMT. Depending on where you installed it, you will find a folder including the samples such as: ***C:\Program Files\Oracle Client for Microsoft Tools\network\admin\sample***
 
-<img  height="200" alt="image" src="https://github.com/user-attachments/assets/24b54eae-9b57-4422-abf0-03b99dad6093" />
+<img  height="200" alt="image" src="/images/post1/adminsamples.png" />
 
 You can copy both files to the location you specified during the OCMT installation.
 
@@ -141,7 +141,7 @@ Then I edited the samples and specified SQLNET.AUTHENTICATION_SERVICES to NONE (
 
 For more information on this, consult Oracle's documentation such as [Local Naming Parameters in the tnsnames.ora File](https://docs.oracle.com/en/database/oracle/oracle-database/19/netrf/local-naming-parameters-in-tns-ora-file.html).
 
-<img height="600" alt="image" src="https://github.com/user-attachments/assets/3e390bcf-6f13-4283-8d09-9f2a56db7c69"/>
+<img height="600" alt="image" src="/images/post1/sqlnet.png"/>
 
 And finally, I connected by using the same PowerShell sample with the **alias** defined by me in the TNSNAMES.ORA file (*inesalias*) instead of EZCONNECT.
 
