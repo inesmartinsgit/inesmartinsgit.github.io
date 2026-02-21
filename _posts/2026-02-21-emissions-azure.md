@@ -44,7 +44,7 @@ If you are setting up the Power BI Emissions Impact Dashboard for Azure, you nee
 
 Regardless of the agreement type, the billing account must have a **direct billing relationship** with Microsoft.
 
-## Common Pitfall #1: The Wrong Billing Account  
+### Common Pitfall #1: The Wrong Billing Account  
 
 A frequent issue occurs when the person configuring the dashboard is a billing account admin but not for the billing account that contains the subscriptions they want to analyze.
 
@@ -56,14 +56,14 @@ In this scenario:
 This can be particularly frustrating because no explicit error is shown. The user believes they have sufficient permissions, yet the expected data does not appear. <br>
 Azure billing permissions do not always produce explicit authorization errors. Instead, certain menus and options are simply hidden.
 
-## Common Pitfall #2: The Global Admin Misconception
+### Common Pitfall #2: The Global Admin Misconception
 
 Another common misunderstanding involves the Global Administrator role in Microsoft Entra ID (formerly Azure AD). <br>
 Users frequently assume that a Global Admin automatically has access to all billing accounts. <br>
 However, billing permissions are separate and the Global Admin sometimes cannot help further.
 
 
-## Recommendation
+### Recommendation
 
 The most effective approach is to contact the individuals responsible for managing billing in your organization. In some cases, this may be a CSP partner. <br>
 In large organizations, identifying the correct billing admin can be challenging, especially when multiple billing accounts are managed by different teams.
