@@ -236,7 +236,7 @@ If you have feedback or ideas to improve it, I’d love to hear them!<br>
 
 <br>
 
-### Setting Up Sever Logs
+### Setting Up Server Logs
 
 #### Oracle server: Sessions and Processes
 	
